@@ -2,14 +2,78 @@
     x:Class="SuroboyoMaju.Shared.Pages.PersonalChatPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SuroboyoMaju.Shared.Pages"
+    xmlns:local="using:SuroboyoMaju.Shared.Helper"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="Light"
+    Loaded="pageLoaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <local:ChatAlignmentConverter x:Key="chatAlignmentConverter"/>
+        <local:ChatBackgroundConverter x:Key="chatBackgroundConverter"/>
+        <Style x:Key="ListViewItemStretchStyle" TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="ItemContainerTransitions">
+                <Setter.Value>
+                    <TransitionCollection/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition x:Name="rowChat" Height="8*"></RowDefinition>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="GreenYellow">
+            <StackPanel Orientation="Horizontal">
+                <Button Background="GreenYellow" Margin="15,0,0,0" Name="btnBack" Click="Back_Click" HorizontalAlignment="Left">
+                    <SymbolIcon Symbol="Back"></SymbolIcon>
+                </Button>
+                <TextBlock Name="txtNamaUserPenerima" Margin="12,24,0,0" FontSize="20" Text="Nama User"></TextBlock>
+            </StackPanel>
+        </Grid>
 
+        <StackPanel Grid.Row="1">
+            <ListView ItemContainerStyle="{StaticResource ListViewItemStretchStyle}"  Margin="0,10,0,10" SelectionMode="None" Name="lvChat" ItemsSource="{Binding listChat}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsStackPanel VerticalAlignment="Bottom"
+                            ItemsUpdatingScrollMode="KeepLastItemInView"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="chatTemplate">
+                        <Grid HorizontalAlignment="{Binding isSender,Converter={StaticResource chatAlignmentConverter}}" x:Name="Text" Background="White" Margin="5, 5, 5, 5">
+                            <Border BorderThickness="1" BorderBrush="Black" Background="{Binding isSender,Converter={StaticResource chatBackgroundConverter}}" CornerRadius="7">
+                                <StackPanel>
+                                    <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" MaxWidth="350" FontSize="18" Text="{Binding isi_chat}" TextWrapping="Wrap" Margin="5, 5, 5, 5" />
+                                    <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" MaxWidth="350" FontSize="14" Text="{Binding waktu_chat}" HorizontalAlignment="Right" Margin="5, 5, 5, 5" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <Grid Grid.Row="2"  Background="GreenYellow">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Padding="16" Grid.Column="0">
+                    <TextBox FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontSize="14" Name="txtChatMessage" PlaceholderText="Enter a message.." Grid.Column="0" ></TextBox>
+                </Grid>
+                <Grid Padding="16" Grid.Column="1">
+                    <Button FontWeight="Bold" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Click="sendChat" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Kirim"></Button>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

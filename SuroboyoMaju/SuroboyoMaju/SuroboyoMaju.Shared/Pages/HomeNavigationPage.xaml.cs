@@ -90,9 +90,9 @@ namespace SuroboyoMaju.Shared.Pages
                     ContentFrame.Navigate(typeof(ProfilePage));
                     break;
 
-                //case "chatPage":
-                //    this.Frame.Navigate(typeof(ChatListPage));
-                //    break;
+                case "chatPage":
+                    this.Frame.Navigate(typeof(ChatListPage));
+                    break;
 
                 case "contactPage":
                     ContentFrame.Navigate(typeof(ContactPage));
