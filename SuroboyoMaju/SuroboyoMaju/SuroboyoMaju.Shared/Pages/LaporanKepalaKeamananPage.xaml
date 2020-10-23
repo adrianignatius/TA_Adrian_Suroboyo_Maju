@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="SuroboyoMaju.Shared.Pages.AllLostFoundReportPage"
+    x:Class="SuroboyoMaju.Shared.Pages.LaporanKepalaKeamananPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SuroboyoMaju.Shared.Helper"
@@ -7,11 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="Light"
+    Loaded="pageLoaded"
     FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <SolidColorBrush x:Key="brushTransparent" Color="Black" Opacity="0.7"></SolidColorBrush>
+        <SolidColorBrush x:Key="brushTransparent" Color="Black" Opacity="0.4"></SolidColorBrush>
         <local:DatetimeConverter x:Key="dateTimeConverter"/>
         <local:ImageLaporanConverter x:Key="imageConverter"/>
     </Page.Resources>
@@ -22,25 +23,16 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Margin="0,8,0,12">
+            <StackPanel Grid.Row="0" Margin="0,8,0,8">
                 <Grid Margin="0,0,0,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button Click="Back_Click" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource NavigationBackButtonNormalStyle}"></Button>
-                    <TextBlock Grid.Column="1" Name="txtJudulHalaman" Text="Daftar Laporan Lost &amp; Found" TextWrapping="WrapWholeWords" Margin="12,4,0,0" FontSize="24" FontWeight="Bold" ></TextBlock>
+                    <TextBlock Grid.Column="1" Name="txtJudulHalaman" Text="Daftar Laporan Area" TextWrapping="WrapWholeWords" Margin="12,4,0,0" FontSize="24" FontWeight="Bold" ></TextBlock>
                 </Grid>
-                <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Click="goToFilterPage" Margin="12,0,12,0" Foreground="White" Background="Green" CornerRadius="10" HorizontalAlignment="Stretch" >
-                    <Button.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Filter" HorizontalAlignment="Left"></SymbolIcon>
-                            <TextBlock FontSize="16" FontWeight="Medium" Margin="4,0,0,0">Filter</TextBlock>
-                        </StackPanel>
-                    </Button.Content>
-                </Button>
             </StackPanel>
-
             <StackPanel Name="stackLoading" Margin="0,140,0,0" Visibility="Collapsed" Grid.Row="1">
                 <ProgressRing Width="150" Height="150" IsActive="True"></ProgressRing>
                 <TextBlock Foreground="Black" FontWeight="Bold" TextAlignment="Center" TextWrapping="WrapWholeWords" FontSize="20" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Text="Sedang memuat data"></TextBlock>
@@ -51,30 +43,22 @@
             </StackPanel>
             <ScrollViewer Name="svListView" Grid.Row="1">
                 <StackPanel Margin="8" Orientation="Vertical">
-                    <Button Visibility="Collapsed" Name="btnRefresh" Click="refreshPage" Grid.Row="2" HorizontalAlignment="Left" Foreground="White" Background="Green" CornerRadius="10">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Text="Hapus filter"></TextBlock>
-                                <SymbolIcon Margin="4,0,0,0" Symbol="Cancel"></SymbolIcon>
-                            </StackPanel>
-                        </Button.Content>
-                    </Button>
-                    <ListView Name="lvLaporanLostFound" ItemClick="goToDetailPage" SelectionMode="None" IsItemClickEnabled="True" Margin="0,16,0,0" >
+                    <ListView ItemClick="goToDetailPage" Name="lvLaporanArea" SelectionMode="None" IsItemClickEnabled="True" Margin="0,16,0,0">
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplate">
                                 <Border Margin="0,4,0,4" CornerRadius="10" BorderBrush="Gray" BorderThickness="1">
                                     <Grid MaxHeight="280">
                                         <Image Source="{Binding thumbnail_gambar,Converter={StaticResource imageConverter}}" Stretch="UniformToFill"/>
                                         <StackPanel Orientation="Vertical" Height="80" VerticalAlignment="Bottom" Background="{StaticResource brushTransparent}" Padding="12">
-                                            <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontWeight="ExtraBold" Opacity="1" Foreground="White" FontSize="14" Text="{Binding judul_laporan }"/>
+                                            <TextBlock FontWeight="ExtraBold" Opacity="1" Foreground="White" FontSize="14" Text="{Binding judul_laporan }"/>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock  FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Opacity="1" Foreground="White" FontSize="14" Text="{Binding tanggal_laporan,Converter={StaticResource dateTimeConverter}}"></TextBlock>
-                                                <TextBlock  FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="2,0,0,0" Text="Pukul" Opacity="1" Foreground="White" FontSize="14"></TextBlock>
-                                                <TextBlock  FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="2,0,0,0" Opacity="1" Foreground="White" Text="{Binding waktu_laporan}" FontSize="14"></TextBlock>
+                                                <TextBlock Opacity="1" Foreground="White" FontSize="14" Text="{Binding tanggal_laporan,Converter={StaticResource dateTimeConverter}}"></TextBlock>
+                                                <TextBlock Margin="2,0,0,0" Text="Pukul" Opacity="1" Foreground="White" FontSize="14"></TextBlock>
+                                                <TextBlock Margin="2,0,0,0" Opacity="1" Foreground="White" Text="{Binding waktu_laporan}" FontSize="14"></TextBlock>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock  FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Opacity="1" Foreground="White" FontSize="14" Text="Oleh"></TextBlock>
-                                                <TextBlock  FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="2,0,0,0" Opacity="1" Foreground="White" FontSize="14" Text="{Binding nama_user_pelapor}"></TextBlock>
+                                                <TextBlock Opacity="1" Foreground="White" FontSize="14" Text="Oleh"></TextBlock>
+                                                <TextBlock Margin="2,0,0,0" Opacity="1" Foreground="White" FontSize="14" Text="{Binding nama_user_pelapor}"></TextBlock>
                                             </StackPanel>
                                         </StackPanel>
                                     </Grid>
@@ -82,7 +66,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="0,8,0,8" Grid.Row="2" HorizontalAlignment="Center" Foreground="White" Background="Green" CornerRadius="10" Content="Muat lagi"></Button>
+                    <Button Margin="0,8,0,8" Grid.Row="2" HorizontalAlignment="Center" Foreground="White" Background="Green" CornerRadius="10" Content="Muat lagi"></Button>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

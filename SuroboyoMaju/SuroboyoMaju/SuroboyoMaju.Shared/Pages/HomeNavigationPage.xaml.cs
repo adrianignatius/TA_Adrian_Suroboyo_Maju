@@ -68,13 +68,13 @@ namespace SuroboyoMaju.Shared.Pages
                     ContentFrame.Navigate(typeof(HomePage));
                     break;
 
-                //case "MakeLostFoundReportPage":
-                //    this.Frame.Navigate(typeof(MakeLostFoundReportPage));
-                //    break;
+                case "MakeLostFoundReportPage":
+                    this.Frame.Navigate(typeof(MakeLostFoundReportPage));
+                    break;
 
-                //case "MakeCrimeReportPage":
-                //    this.Frame.Navigate(typeof(MakeCrimeReportPage));
-                //    break;
+                case "MakeCrimeReportPage":
+                    this.Frame.Navigate(typeof(MakeCrimeReportPage));
+                    break;
 
                 case "SignOut":
                     SecureStorage.Remove("jwt_token");
@@ -98,9 +98,9 @@ namespace SuroboyoMaju.Shared.Pages
                     ContentFrame.Navigate(typeof(ContactPage));
                     break;
 
-                    //case "historyPage":
-                    //    this.Frame.Navigate(typeof(HistoryPage));
-                    //    break;
+                case "historyPage":
+                    this.Frame.Navigate(typeof(HistoryPage));
+                    break;
             }
         }
     }
