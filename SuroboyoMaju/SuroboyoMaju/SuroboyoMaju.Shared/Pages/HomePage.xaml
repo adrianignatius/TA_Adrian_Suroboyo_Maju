@@ -1,0 +1,191 @@
+﻿<Page
+    x:Class="SuroboyoMaju.Shared.Pages.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SuroboyoMaju.Shared.Helper"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+     xmlns:android="http://uno.ui/android"
+    xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d android"
+    Loaded="pageLoaded"
+    RequestedTheme="Light"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <local:DatetimeConverter x:Key="dateTimeConverter"/>
+        <SolidColorBrush x:Key="brushTransparent" Color="Black" Opacity="0.7"></SolidColorBrush>
+        <local:ImageLaporanConverter x:Key="imageConverter"/>
+        <local:IconVisibilityConverter x:Key="iconVisibilityConverter"></local:IconVisibilityConverter>
+    </Page.Resources>
+
+    <Grid Margin="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition win:Height="auto" android:Height="auto"></RowDefinition>
+                <RowDefinition win:Height="auto" android:Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" CornerRadius="12" Padding="12" Margin="0,0,0,0" Background="YellowGreen">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Ellipse Grid.Column="0" Height="72" Width="72" VerticalAlignment="Center">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/Assets/avatar-profile.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <StackPanel Margin="12,0,0,0" Grid.Column="1" Orientation="Vertical">
+                        <TextBlock Name="txtNamaUser" Text="Welcome, nama user!" FontSize="16" FontWeight="Black"/>
+                        <TextBlock Name="txtStatusUser" Text="Status akun" FontSize="14" FontWeight="SemiLight" Foreground="White"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="2" Orientation="Horizontal">
+                        <android:Button Name="btnEmergency" HorizontalAlignment="Right" Click="emergencyAction" Foreground="White" Background="Red" CornerRadius="10" Content="Emergency"></android:Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <android:StackPanel Margin="0,12,0,0" Grid.Row="1" Orientation="Vertical">
+                <Grid Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button FontSize="16" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Tag="1" Click="changeSource" Name="btnSelectionLaporanLostFound" Margin="4,0,4,0"  Foreground="Green" Background="White" BorderBrush="Green" HorizontalAlignment="Stretch" Grid.Column="0" Content="Laporan &amp; Lost Found"></Button>
+                    <Button FontSize="16" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Tag="2" Click="changeSource" Name="btnSelectionLaporanKriminalitas" Margin="4,0,4,0" Foreground="Green" Background="White" BorderBrush="Green" HorizontalAlignment="Stretch" Grid.Column="1" Content="Laporan Kriminalitas"></Button>
+                </Grid>
+                <Grid Margin="0,8,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="txtHeadlineTitle"  FontWeight="ExtraBold" FontSize="14" Grid.Column="0" Text="Laporan Lost &amp; Found Terkini"></TextBlock>
+                    <TextBlock Name="txtTagLine" Tag="lostfound"  Tapped="goToAllReportPage" Foreground="Green" Grid.Column="1" TextAlignment="Right" Text="Lihat Semua"></TextBlock>
+                </Grid>
+            </android:StackPanel>
+            <android:ListView Grid.Row="2" Name="lvHeadline" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="goToDetailPage" Margin="0,10,0,0" >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="ImageOverlayDataTemplate">
+                        <Border Margin="0,4,0,4" CornerRadius="10" BorderBrush="Gray" BorderThickness="1">
+                            <Grid MaxHeight="280">
+                                <Image Source="{Binding thumbnail_gambar,Converter={StaticResource imageConverter}}" Stretch="UniformToFill"/>
+                                <StackPanel Orientation="Vertical" Height="96" VerticalAlignment="Bottom" Background="{StaticResource brushTransparent}" Padding="12">
+                                    <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontWeight="ExtraBold" Opacity="1" Foreground="White" FontSize="14" Text="{Binding judul_laporan }"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Opacity="1" Foreground="White" FontSize="14" Text="{Binding tanggal_laporan,Converter={StaticResource dateTimeConverter}}"></TextBlock>
+                                        <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="2,0,0,0" Text="Pukul" Opacity="1" Foreground="White" FontSize="14"></TextBlock>
+                                        <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="2,0,0,0" Opacity="1" Foreground="White" Text="{Binding waktu_laporan}" FontSize="14"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Opacity="1" Foreground="White" FontSize="14" Text="Oleh"></TextBlock>
+                                        <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="4,0,0,0" Opacity="1" Foreground="White" FontSize="14" Text="{Binding nama_user_pelapor}"></TextBlock>
+                                    </StackPanel>
+                                    <Grid Margin="0,0,0,8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Visibility="{Binding kategori_laporan,Converter={StaticResource iconVisibilityConverter}}"  Orientation="Horizontal"  Grid.Column="0" HorizontalAlignment="Left">
+                                            <SymbolIcon Symbol="View" Foreground="White"></SymbolIcon>
+                                            <TextBlock  Margin="4,0,0,0" Opacity="1" Foreground="White" FontSize="14" Text="{Binding jumlah_konfirmasi}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal"  Grid.Column="1"  HorizontalAlignment="Right">
+                                            <SymbolIcon Symbol="Comment" Foreground="White"></SymbolIcon>
+                                            <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="4,-1,0,0" Opacity="1" Foreground="White" FontSize="14" Text="{Binding jumlah_komentar}"></TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </android:ListView>
+            <win:StackPanel Margin="0,12,0,0" Grid.Row="1">
+                <win:Grid Margin="0,4,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="15" FontWeight="ExtraBold">Laporan Kriminalitas Terkini</TextBlock>
+                    <TextBlock Tag="kriminalitas" Tapped="goToAllReportPage" HorizontalAlignment="Right" Grid.Column="1" Margin="10,5,0,0" Foreground="Green" FontWeight="Medium" FontSize="12" Text="Lihat semua"></TextBlock>
+                </win:Grid>
+                <win:ListView ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" Tag="lvKriminalitas" Name="lvLaporanKriminalitas" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="goToDetailPage" Margin="0,10,0,0" >
+                    <ListView.ItemTemplate>
+                        <win:DataTemplate x:Name="templateLaporanKriminalitas">
+                            <Border CornerRadius="10" BorderBrush="Gray" BorderThickness="1">
+                                <Grid Name="borderGrid" MaxHeight="300" MaxWidth="360">
+                                    <Image Source="{Binding thumbnail_gambar,Converter={StaticResource imageConverter}}" Stretch="UniformToFill"/>
+                                    <StackPanel Orientation="Vertical" Height="96" VerticalAlignment="Bottom" Background="{StaticResource brushTransparent}" Padding="12">
+                                        <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontWeight="ExtraBold" Opacity="1" Foreground="White" FontSize="14" Text="{Binding judul_laporan }"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Opacity="1" Foreground="White" FontSize="14" Text="{Binding tanggal_laporan,Converter={StaticResource dateTimeConverter}}"></TextBlock>
+                                            <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="2,0,0,0" Text="Pukul" Opacity="1" Foreground="White" FontSize="14"></TextBlock>
+                                            <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="2,0,0,0" Opacity="1" Foreground="White" Text="{Binding waktu_laporan}" FontSize="14"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Opacity="1" Foreground="White" FontSize="14" Text="Oleh"></TextBlock>
+                                            <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="4,0,0,0" Opacity="1" Foreground="White" FontSize="14" Text="{Binding nama_user_pelapor}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Opacity="1" Foreground="White" FontSize="14" Text="{Binding jumlah_komentar}"></TextBlock>
+                                            <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="2,0,0,0" Opacity="1" Foreground="White" FontSize="14" Text="Komentar"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </win:DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Background="Transparent" Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </win:ListView>
+            </win:StackPanel>
+            <win:StackPanel Margin="0,12,0,0" Name="stackListView" Grid.Row="2">
+                <win:Grid Margin="0,4,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0" FontSize="15" FontWeight="ExtraBold">Laporan Lost &amp; Found Terkini</TextBlock>
+                    <TextBlock Tag="lostfound" Tapped="goToAllReportPage" HorizontalAlignment="Right" Grid.Column="1" Margin="10,5,0,0" Foreground="Green" FontWeight="Medium" FontSize="12" Text="Lihat semua"></TextBlock>
+                </win:Grid>
+                <win:ListView ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"  Tag="lvLostfound" Name="lvLaporanLostFound" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="goToDetailPage" Margin="0,10,0,0" >
+                    <ListView.ItemTemplate>
+                        <win:DataTemplate x:Name="templateLaporanLostFound">
+                            <Border CornerRadius="10" BorderBrush="Gray" BorderThickness="1">
+                                <Grid Name="borderGrid" MaxHeight="300"  MaxWidth="360">
+                                    <Image Source="{Binding thumbnail_gambar,Converter={StaticResource imageConverter}}" Stretch="UniformToFill"/>
+                                    <StackPanel Orientation="Vertical" Height="96" VerticalAlignment="Bottom" Background="{StaticResource brushTransparent}" Padding="12">
+                                        <TextBlock FontWeight="ExtraBold" Opacity="1" Foreground="White" FontSize="14" Text="{Binding judul_laporan }"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Opacity="1" Foreground="White" FontSize="14" Text="{Binding tanggal_laporan,Converter={StaticResource dateTimeConverter}}"></TextBlock>
+                                            <TextBlock Margin="2,0,0,0" Text="Pukul" Opacity="1" Foreground="White" FontSize="14"></TextBlock>
+                                            <TextBlock Margin="2,0,0,0" Opacity="1" Foreground="White" Text="{Binding waktu_laporan}" FontSize="14"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Opacity="1" Foreground="White" FontSize="14" Text="Oleh"></TextBlock>
+                                            <TextBlock Margin="2,0,0,0" Opacity="1" Foreground="White" FontSize="14" Text="{Binding nama_user_pelapor}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Opacity="1" Foreground="White" FontSize="14" Text="{Binding jumlah_komentar}"></TextBlock>
+                                            <TextBlock Margin="2,0,0,0" Opacity="1" Foreground="White" FontSize="14" Text="Komentar"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </win:DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Background="Transparent" Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </win:ListView>
+            </win:StackPanel>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,72 @@
+﻿<Page
+    x:Class="SuroboyoMaju.Shared.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SuroboyoMaju.Shared.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Light"
+    FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="rootGrid">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="textBlockSignIn.Margin" Value="30,30,0,0"></Setter>
+                        <Setter Target="textBlockSignIn.FontSize" Value="36"></Setter>
+                        <Setter Target="column2.Width" Value="0"></Setter>
+                        <Setter Target="rootPanel.Margin" Value="20"></Setter>
+                        <Setter Target="textBlockEmail.FontSize" Value="20"></Setter>
+                        <Setter Target="txtNoHandphone.FontSize" Value="20"></Setter>
+                        <Setter Target="txtPassword.FontSize" Value="20"></Setter>
+                        <Setter Target="textBlockPassword.FontSize" Value="20"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1080"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="appIconBg.Visibility" Value="Collapsed"></Setter>
+                        <Setter Target="textBlockSignIn.FontSize" Value="36"></Setter>
+                        <Setter Target="rootPanel.Margin" Value="20"></Setter>
+                        <Setter Target="column1.Width" Value="2*"></Setter>
+                        <Setter Target="column2.Width" Value="3*"></Setter>
+                        <Setter Target="textBlockEmail.FontSize" Value="25"></Setter>
+                        <Setter Target="txtNoHandphone.FontSize" Value="25"></Setter>
+                        <Setter Target="txtPassword.FontSize" Value="25"></Setter>
+                        <Setter Target="textBlockPassword.FontSize" Value="25"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="column1" Width="2*"></ColumnDefinition>
+                <ColumnDefinition x:Name="column2" Width="3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel x:Name="rootPanel" Grid.Column="0" Margin="60" Orientation="Vertical">
+                <Image Name="appIconBg" Source="/Assets/app-logobesar.png" Width="200" Height="200"></Image>
+                <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="30,0,30,0" x:Name="textBlockSignIn" Foreground="Black" FontSize="40" FontWeight="ExtraBold">Sign In</TextBlock>
+                <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" TextWrapping="Wrap" Margin="30,10,0,20" Foreground="Black" FontSize="15" >Don't have an account? <Hyperlink Click="goToRegister">Create your account here</Hyperlink></TextBlock>
+                <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="textBlockEmail" Foreground="Black" Margin="30,0,30,0" FontSize="30">No Handphone</TextBlock>
+                <TextBox FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" MaxLength="13" BeforeTextChanging="validateInput" Name="txtNoHandphone" Padding="8" Foreground="Black" Margin="30,10,30,0" FontSize="20" Height="50"></TextBox>
+                <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="textBlockPassword" Foreground="Black" Margin="30,20,30,0" FontSize="30">Password</TextBlock>
+                <PasswordBox FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="txtPassword" Padding="8" Foreground="Black" Margin="30,10,30,0" FontSize="20" Height="50"></PasswordBox>
+                <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Click="login"  Foreground="AntiqueWhite" x:Name="btnLogin" Background="DarkGreen" FontWeight="SemiBold" Padding="15" Content="Login" HorizontalAlignment="Stretch" Margin="30,35,30,0" FontSize="30" />
+                <ProgressRing Margin="0,40,0,0" Width="50" Height="50" Visibility="Collapsed" Name="progressRing"></ProgressRing>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+              
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

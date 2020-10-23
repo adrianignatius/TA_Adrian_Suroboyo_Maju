@@ -144,6 +144,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\Fonts\Alata-Regular.ttf" />
     <None Include="SuroboyoMaju.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

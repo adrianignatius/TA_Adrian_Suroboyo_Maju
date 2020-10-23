@@ -18,8 +18,71 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Class\AutocompleteAddress.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\Chat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\ChatPageParams.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\ConfirmReportParams.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\DisplayHeaderChat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\FilterParams.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\HeaderChat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\HttpObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\KantorPolisi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\Kecamatan.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\KomentarLaporan.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\LaporanKriminalitas.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\LaporanLostFound.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\PendingContact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\ReportDetailPageParams.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\Session.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\SettingKategori.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\UpdateProfileParams.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\UploadedImage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Class\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ChatAlignmentConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ChatBackgroundConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\DateTimeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\IconVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ImageLaporanConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ImageSourceKantorPolisiConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\StatusLaporanButtonConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\StatusLaporanColorConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\StatusLaporanConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\StatusLaporanHeightConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\AllCrimeReportPage.xaml.cs">
+      <DependentUpon>AllCrimeReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\AllLostFoundReportPage.xaml.cs">
+      <DependentUpon>AllLostFoundReportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\HomeNavigationPage.xaml.cs">
+      <DependentUpon>HomeNavigationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\HomeNavigationPageKepalaKeamanan.xaml.cs">
+      <DependentUpon>HomeNavigationPageKepalaKeamanan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\PersonalChatPage.xaml.cs">
+      <DependentUpon>PersonalChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ReportDetailPage.xaml.cs">
+      <DependentUpon>ReportDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\SplashScreenPage.xaml.cs">
+      <DependentUpon>SplashScreenPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\VerifyOtpPage.xaml.cs">
+      <DependentUpon>VerifyOtpPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -27,11 +90,85 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\AllCrimeReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\AllLostFoundReportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\HomeNavigationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\HomeNavigationPageKepalaKeamanan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\PersonalChatPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\RegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\ReportDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\SplashScreenPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\VerifyOtpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
-	<ItemGroup>
-		<None Include="$(MSBuildThisFileDirectory)Assets\SharedAssets.md" />
-	</ItemGroup>
-	<ItemGroup>
-		<PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Assets\SharedAssets.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\app-logobesar.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\avatar-profile.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\bg.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\chat-illustration.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\community-illustration.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\empty-illustration.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\bag-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\card-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\crime-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\handphone-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\hitandrun-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\jewerly-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\kidnap-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\location-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\lostfound-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\otp-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\pet-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\robbery-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\shoes-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\signout.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\suspicious-activity-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\vandalism-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\violence-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\wallet-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\watch-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\no-image.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\payment-illustration.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\puzzle-illustration.jpg" />
+  </ItemGroup>
 </Project>
