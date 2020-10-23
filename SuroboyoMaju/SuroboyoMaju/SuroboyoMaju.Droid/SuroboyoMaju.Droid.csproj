@@ -65,6 +65,9 @@
     <PackageReference Include="Com.OneSignal">
       <Version>3.10.1</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client">
+      <Version>5.0.0-rc.2.20475.17</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
