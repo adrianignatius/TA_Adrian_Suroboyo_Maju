@@ -6,9 +6,40 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    RequestedTheme="Light"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <NavigationView FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Background="White" x:Name="NavView" ItemInvoked="NavView_ItemInvoked" IsSettingsVisible="False" Loaded="NavView_Loaded" IsBackButtonVisible="Collapsed">
+        <NavigationView.MenuItems>
+            <NavigationViewItem x:Uid="HomeNavItem" Content="Home" Tag="home">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE10F;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Lihat semua laporan lost &amp; found" Tag="AllLostFoundReportPage">
+                <NavigationViewItem.Icon>
+                    <BitmapIcon UriSource="/Assets/icon/lostfound-icon.png"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Lihat semua laporan kriminalitas" Tag="AllCrimeReportPage">
+                <NavigationViewItem.Icon>
+                    <BitmapIcon UriSource="/Assets/icon/crime-icon.png"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Area pengawasan saya" Icon="Admin" Tag="AreaReportPage"></NavigationViewItem>
+            <NavigationViewItem x:Uid="HomeNavItem" Content="Sign Out" Tag="SignOut">
+                <NavigationViewItem.Icon>
+                    <BitmapIcon UriSource="/Assets/icon/signout.png"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+        </NavigationView.MenuItems>
 
-    </Grid>
+        <Frame Background="White" x:Name="ContentFrame" Margin="0,40,0,0">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition/>
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
+    </NavigationView>
 </Page>

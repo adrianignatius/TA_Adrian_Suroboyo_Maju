@@ -82,25 +82,25 @@ namespace SuroboyoMaju.Shared.Pages
                     this.Frame.Navigate(typeof(LoginPage));
                     break;
 
-                //case "PoliceStationPage":
-                //    this.Frame.Navigate(typeof(PoliceStationListPage));
-                //    break;
+                case "PoliceStationPage":
+                    this.Frame.Navigate(typeof(PoliceStationListPage));
+                    break;
 
-                //case "ProfilePage":
-                //    ContentFrame.Navigate(typeof(ProfilePage));
-                //    break;
+                case "ProfilePage":
+                    ContentFrame.Navigate(typeof(ProfilePage));
+                    break;
 
                 //case "chatPage":
                 //    this.Frame.Navigate(typeof(ChatListPage));
                 //    break;
 
-                //case "contactPage":
-                //    ContentFrame.Navigate(typeof(ContactPage));
-                //    break;
+                case "contactPage":
+                    ContentFrame.Navigate(typeof(ContactPage));
+                    break;
 
-                //case "historyPage":
-                //    this.Frame.Navigate(typeof(HistoryPage));
-                //    break;
+                    //case "historyPage":
+                    //    this.Frame.Navigate(typeof(HistoryPage));
+                    //    break;
             }
         }
     }

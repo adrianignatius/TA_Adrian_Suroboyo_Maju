@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="SuroboyoMaju.Shared.Pages.ProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SuroboyoMaju.Shared.Helper"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Light"
+    Loaded="pageLoaded"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style x:Key="textBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"></Setter>
+        </Style>
+        <Style x:Key="textBoxStyle" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"></Setter>
+        </Style>
+    </Page.Resources>
+    <Grid Margin="20">
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource textBlockStyle}" FontSize="30" FontWeight="SemiBold" Text="Profile Saya"></TextBlock>
+                    <Button Click="changePassword" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Foreground="White" Background="Green" CornerRadius="10" Margin="10,0,0,0" Content="Change Password"></Button>
+                </StackPanel>
+                <TextBlock Style="{StaticResource textBlockStyle}" Margin="0,15,0,0" FontSize="16" Text="Nomor Telepon" FontWeight="Medium"></TextBlock>
+                <TextBlock Name="txtNotelpUser" Style="{StaticResource textBlockStyle}" Margin="0,10,0,0" FontSize="14" Text="NoTelp"></TextBlock>
+                <TextBlock Style="{StaticResource textBlockStyle}" Margin="0,15,0,0" FontSize="16" Text="Nama Lengkap" FontWeight="Medium"></TextBlock>
+                <TextBox Name="txtNamaUser"  Style="{StaticResource textBoxStyle}" Margin="0,10,0,0" FontSize="14"></TextBox>
+                <!--<TextBlock Style="{StaticResource textBlockStyle}" Margin="0,15,0,0" FontSize="16" Text="Email" FontWeight="Medium"></TextBlock>
+                <TextBox Name="txtEmailUser" Style="{StaticResource textBoxStyle}" Margin="0,10,0,0" FontSize="14" ></TextBox>-->
+                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource textBlockStyle}"  FontSize="16" Text="Lokasi Aktif" FontWeight="Medium"></TextBlock>
+                    <TextBlock Margin="2,0,0,0" Name="txtStatusLokasiAktif" FontSize="16" Foreground="Gray" Text="(Belum diatur)"></TextBlock>
+                    <Button Click="showEditPanel" Name="btnEditLokasi" Margin="4,0,0,0" Foreground="White" Background="Green" Content="Ubah" CornerRadius="10" FontSize="12"></Button>
+                    <Button Click="disableLokasi" Name="btnDisableLokasi" Margin="4,0,0,0" Foreground="White" Background="Green" Content="Non-aktifkan" CornerRadius="10" FontSize="12"></Button>
+                </StackPanel>
+                <TextBlock TextWrapping="Wrap" FontSize="12" Foreground="Red" Text="* Dengan memasukkan lokasi aktif nantinya ketika terdapat laporan yang terjadi disekitar anda maka anda akan diberi notifikasi"></TextBlock>
+                <TextBlock Name="txtLabelLokasi" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" TextWrapping="WrapWholeWords" Margin="0,4,0,0" FontSize="14" Text="Jl. Manggis X no 730"></TextBlock>
+                <StackPanel Visibility="Collapsed" Orientation="Vertical" Name="stackLokasi">
+                    <TextBox Name="txtAutocompleteAddress" Style="{StaticResource textBoxStyle}" TextChanged="txtAutocompleteAddressTextChanged" Margin="0,10,0,0" FontSize="14" ></TextBox>
+                    <ListView FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" IsItemClickEnabled="True" ItemClick="suggestionChosen" Name="lvSuggestion">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="12" Text="{Binding description}"></TextBlock>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackPanel Margin="0,8,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button Click="hideEditPanel" Margin="4,0,4,0" Content="Batal" CornerRadius="10" Background="Red" Foreground="White"></Button>
+                        <Button Click="editLokasi" Margin="4,0,4,0" Content="Simpan" CornerRadius="10" Background="Green" Foreground="White"></Button>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock Margin="0,15,0,0" Style="{StaticResource textBlockStyle}" FontSize="16" Text="Tipe Akun" FontWeight="Medium"></TextBlock>
+                <StackPanel Margin="0,8,0,0" Orientation="Horizontal">
+                    <TextBlock Name="txtStatusAccount" Style="{StaticResource textBlockStyle}" Margin="0,4,0,0" FontSize="14" Text="Free Account" ></TextBlock>
+                    <Button Margin="8,-4,0,0" Name="btnSubscribe" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Click="goToSubscriptionPage" CornerRadius="10" Content="Upgrade" Background="Green" Foreground="White"></Button>
+                </StackPanel>
+                <Button Click="goToConfirmationPage" Name="btnUpdate" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="0,24,0,0" FontSize="20" CornerRadius="10" Content="Simpan Perubahan" HorizontalAlignment="Stretch" Background="Green" Foreground="White"></Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

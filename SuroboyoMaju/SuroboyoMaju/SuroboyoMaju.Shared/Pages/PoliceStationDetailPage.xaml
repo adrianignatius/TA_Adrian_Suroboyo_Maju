@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="SuroboyoMaju.Shared.Pages.PoliceStationDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SuroboyoMaju.Shared.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Light"
+    Loaded="pageLoaded"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer>
+        <Grid>
+            <StackPanel Orientation="Vertical">
+                <Canvas Name="canvasImage" Height="280">
+                    <Button Click="Back_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
+                </Canvas>
+                <Grid Margin="20">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontWeight="Bold" HorizontalAlignment="Center" FontSize="24" Name="txtNamaKantorPolisi"></TextBlock>
+                        <Border CornerRadius="10" Margin="0,15,0,0" BorderBrush="LightBlue" Background="LightGray">
+                            <StackPanel Padding="10" Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <SymbolIcon Symbol="MapPin"></SymbolIcon>
+                                    <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="10,0,0,0" Name="txtAlamatKantorPolisi" FontSize="14"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                                    <SymbolIcon Symbol="Phone"></SymbolIcon>
+                                    <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="10,0,0,0" Name="txtNoTelpKantorPolisi" FontSize="14"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                            <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"  Text="Map" FontSize="24"></TextBlock>
+                            <Button Click="openMap" Margin="8,0,0,0" CornerRadius="10" Foreground="White" Background="Green" Content="Buka Map"></Button>
+                        </StackPanel>
+                        <WebView Margin="0,8,0,0" Name="webViewMap" Height="300" Source="http://adrian-webview.ta-istts.com/location-kantor-polisi.php"></WebView>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>
