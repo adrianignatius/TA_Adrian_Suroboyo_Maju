@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SuroboyoMaju.Shared.Pages;
+using SuroboyoMaju.Shared.Class;
 using Windows.UI.Popups;
 #if __ANDROID__
 using Com.OneSignal.Abstractions;
@@ -47,13 +48,55 @@ namespace SuroboyoMaju
         }
 
 #if __ANDROID__
-        private async static void HandleNotificationOpened(OSNotificationOpenedResult result)
+        private static void HandleNotificationOpened(OSNotificationOpenedResult result)
         {
+            Session session = new Session();
             OSNotificationPayload payload = result.notification.payload;
             Dictionary<string, object> additionalData = payload.additionalData;
-            string message = payload.body;
-            var messageDialog = new MessageDialog(message);
-            await messageDialog.ShowAsync();
+            if (additionalData != null)
+            {
+                HomeNavigationPage homePage = session.getHomeNavigationPageInstance();
+                //Frame rootFrame = Windows.UI.Xaml.Window.Current.Content as Frame;
+                string page = additionalData["page"].ToString();
+                if (page == "1")
+                {
+                    int id_user_pelapor = Convert.ToInt32(additionalData["id_user_pelapor"].ToString());
+                    string nama_user_pelapor = additionalData["nama_user_pelapor"].ToString();
+                    string id_laporan = additionalData["id_laporan"].ToString();
+                    string alamat_laporan = additionalData["alamat_laporan"].ToString();
+                    string tanggal_laporan = additionalData["tanggal_laporan"].ToString();
+                    string waktu_laporan = additionalData["waktu_laporan"].ToString();
+                    string judul_laporan = additionalData["judul_laporan"].ToString();
+                    string jenis_laporan = additionalData["jenis_laporan"].ToString();
+                    string deskripsi_laporan = additionalData["deskripsi_laporan"].ToString();
+                    string lat_laporan = additionalData["lat_laporan"].ToString();
+                    string lng_laporan = additionalData["lng_laporan"].ToString();
+                    string tag = additionalData["tag"].ToString();
+                    string thumbnail_gambar = additionalData["thumbnail_gambar"].ToString();
+                    int status_laporan = Convert.ToInt32(additionalData["status_laporan"].ToString());
+                    int? jumlah_konfirmasi = 0;
+                    if (tag == "kriminalitas")
+                    {
+                        jumlah_konfirmasi = Convert.ToInt32(additionalData["jumlah_konfirmasi"].ToString());
+                    }
+                    else
+                    {
+                        jumlah_konfirmasi = null;
+                    }
+                    ReportDetailPageParams param = new ReportDetailPageParams(id_user_pelapor, nama_user_pelapor, id_laporan, alamat_laporan, tanggal_laporan, waktu_laporan, judul_laporan, jenis_laporan, deskripsi_laporan, lat_laporan, lng_laporan, tag, thumbnail_gambar, status_laporan, jumlah_konfirmasi);
+                    session.setReportDetailPageParams(param);
+                    homePage.Frame.Navigate(typeof(ReportDetailPage));
+                }else if (page == "2")
+                {
+                    int id_chat = Convert.ToInt32(additionalData["id_chat"].ToString());
+                    int id_user_penerima = Convert.ToInt32(additionalData["id_user_penerima"].ToString());
+                    int id_user_pengirim = Convert.ToInt32(additionalData["id_user_pengirim"].ToString());
+                    string nama_display = additionalData["nama_display"].ToString();
+                    ChatPageParams param = new ChatPageParams(id_chat, id_user_penerima, id_user_pengirim, nama_display);
+                    session.setChatPageParams(param);
+                    homePage.Frame.Navigate(typeof(PersonalChatPage));
+                }
+            }
         }
 #endif
 
