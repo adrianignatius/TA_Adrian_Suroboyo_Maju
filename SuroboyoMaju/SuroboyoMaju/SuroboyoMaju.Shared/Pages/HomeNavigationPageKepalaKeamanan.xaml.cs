@@ -65,9 +65,9 @@ namespace SuroboyoMaju.Shared.Pages
                 case "AllCrimeReportPage":
                     this.Frame.Navigate(typeof(AllCrimeReportPage));
                     break;
-                //case "AreaReportPage":
-                //    this.Frame.Navigate(typeof(LaporanKepalaKeamananPage));
-                //    break;
+                case "AreaReportPage":
+                    this.Frame.Navigate(typeof(LaporanKepalaKeamananPage));
+                    break;
                 case "SignOut":
                     this.Frame.Navigate(typeof(LoginPage));
                     SecureStorage.Remove("jwt_token");
