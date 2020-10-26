@@ -5,22 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 using Xamarin.Essentials;
 
 namespace SuroboyoMaju.Shared.Pages
@@ -183,13 +174,9 @@ namespace SuroboyoMaju.Shared.Pages
             if (txtKomentar.Text.Length != 0)
             {
                 string isi_komentar = txtKomentar.Text;
-                string tanggal_komentar = DateTime.Now.ToString("dd/MM/yyyy");
-                string waktu_komentar = DateTime.Now.ToString("HH:mm:ss");
                 var content = new FormUrlEncodedContent(new[]{
                     new KeyValuePair<string, string>("id_laporan", param.id_laporan),
                     new KeyValuePair<string, string>("isi_komentar", isi_komentar),
-                    new KeyValuePair<string, string>("tanggal_komentar", tanggal_komentar),
-                    new KeyValuePair<string, string>("waktu_komentar", waktu_komentar),
                     new KeyValuePair<string, string>("id_user_komentar", userLogin.id_user.ToString())
                 });
                 string responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/insertKomentarLaporan", content, session.getTokenAuthorization());

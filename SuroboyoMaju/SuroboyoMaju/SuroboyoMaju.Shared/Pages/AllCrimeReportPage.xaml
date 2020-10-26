@@ -22,7 +22,7 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Margin="0,8,0,12">
+            <StackPanel Grid.Row="0" Margin="0,8,0,8">
                 <Grid Margin="0,0,0,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -40,8 +40,8 @@
                     </Button.Content>
                 </Button>
                 <StackPanel Name="stackPagination" Margin="0,12,12,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="btnPrevPage" CornerRadius="10" Foreground="White" Background="Green">Prev</Button>
-                    <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="btnNextPage" CornerRadius="10" Margin="4,0,0,0" Foreground="White" Background="Green">Next</Button>
+                    <Button Click="prevPage" Visibility="Collapsed" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="btnPrevPage" CornerRadius="10" Foreground="White" Background="Green">Prev</Button>
+                    <Button Click="nextPage" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="btnNextPage" CornerRadius="10" Margin="4,0,0,0" Foreground="White" Background="Green">Next</Button>
                 </StackPanel>
             </StackPanel>
 

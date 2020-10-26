@@ -20,6 +20,7 @@ namespace SuroboyoMaju.Shared.Pages
         HttpObject httpObject;
         User userLogin;
         ObservableCollection<LaporanKriminalitas> listLaporanKriminalitas = new ObservableCollection<LaporanKriminalitas>();
+        int page = 0;
         public AllCrimeReportPage()
         {
             this.InitializeComponent();
@@ -91,6 +92,17 @@ namespace SuroboyoMaju.Shared.Pages
             ReportDetailPageParams param = new ReportDetailPageParams(selected.id_user_pelapor, selected.nama_user_pelapor, selected.id_laporan, selected.alamat_laporan, selected.tanggal_laporan, selected.waktu_laporan, selected.judul_laporan, selected.jenis_kejadian, selected.deskripsi_kejadian, selected.lat_laporan, selected.lng_laporan, "kriminalitas", selected.thumbnail_gambar, selected.status_laporan, selected.jumlah_konfirmasi);
             session.setReportDetailPageParams(param);
             this.Frame.Navigate(typeof(ReportDetailPage));
+        }
+
+        private void nextPage(object sender,RoutedEventArgs e)
+        {
+            page++;
+            btnPrevPage.Visibility = Visibility.Visible;
+        }
+
+        private void prevPage(object sender, RoutedEventArgs e)
+        {
+            page--;
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)

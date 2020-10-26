@@ -5,14 +5,11 @@ using SuroboyoMaju.Shared.Class;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 using System.Net.Http;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SuroboyoMaju.Shared.Pages
 {
@@ -87,7 +84,7 @@ namespace SuroboyoMaju.Shared.Pages
                 var content = new FormUrlEncodedContent(new[]{
                     new KeyValuePair<string, string>("id_chat", param.id_chat.ToString()),
                     new KeyValuePair<string, string>("id_user_pengirim", param.id_user_pengirim.ToString()),
-                    new KeyValuePair<string, string>("id_user_penerima", param.id_user_penerima.ToString()),
+                    new KeyValuePair<string, string>("id_user_penerima", param.id_user_penerima.ToString()),    
                     new KeyValuePair<string, string>("isi_chat", chatMessage),
                 });
                 string responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/insertDetailChat", content, session.getTokenAuthorization());
