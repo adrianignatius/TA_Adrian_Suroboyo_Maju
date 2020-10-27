@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="Light"
-    Loaded="pageLoaded"
     FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -23,7 +22,7 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Margin="0,8,0,8">
+            <StackPanel Grid.Row="0" Margin="0,8,0,0">
                 <Grid Margin="0,0,0,8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -32,6 +31,10 @@
                     <Button Click="Back_Click" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource NavigationBackButtonNormalStyle}"></Button>
                     <TextBlock Grid.Column="1" Name="txtJudulHalaman" Text="Daftar Laporan Area" TextWrapping="WrapWholeWords" Margin="12,4,0,0" FontSize="24" FontWeight="Bold" ></TextBlock>
                 </Grid>
+                <StackPanel Name="stackPagination" Margin="0,8,12,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Click="prevPage" Visibility="Collapsed" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="btnPrevPage" Margin="4,0,0,0" CornerRadius="10" Foreground="White" Background="Green">Prev</Button>
+                    <Button Click="nextPage" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="btnNextPage" CornerRadius="10" Margin="4,0,0,0" Foreground="White" Background="Green">Next</Button>
+                </StackPanel>
             </StackPanel>
             <StackPanel Name="stackLoading" Margin="0,140,0,0" Visibility="Collapsed" Grid.Row="1">
                 <ProgressRing Width="150" Height="150" IsActive="True"></ProgressRing>
@@ -66,7 +69,6 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Button Margin="0,8,0,8" Grid.Row="2" HorizontalAlignment="Center" Foreground="White" Background="Green" CornerRadius="10" Content="Muat lagi"></Button>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

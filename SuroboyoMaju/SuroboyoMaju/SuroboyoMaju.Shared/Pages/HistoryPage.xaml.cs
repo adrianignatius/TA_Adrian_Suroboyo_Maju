@@ -73,8 +73,7 @@ namespace SuroboyoMaju.Shared.Pages
                 string jenis_laporan = id_laporan.Substring(0, 1) == "L" ? "0" : "1";
                 string responseData = await httpObject.PutRequest("laporan/cancelLaporan/" + jenis_laporan + "/" + id_laporan, null, session.getTokenAuthorization());
                 JObject json = JObject.Parse(responseData);
-                var message = new MessageDialog(json["message"].ToString());
-                await message.ShowAsync();
+                await new MessageDialog(json["message"].ToString()).ShowAsync();
                 if (jenis_laporan == "0")
                 {
                     loadLaporanLostFound();
@@ -84,7 +83,6 @@ namespace SuroboyoMaju.Shared.Pages
                     loadLaporanKriminalitas();
                 }
             }
-
         }
 
         private void setListViewLostFound()
