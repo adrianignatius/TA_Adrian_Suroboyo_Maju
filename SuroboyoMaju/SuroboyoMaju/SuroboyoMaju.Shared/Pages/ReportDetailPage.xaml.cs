@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using Windows.UI;
 using Windows.UI.Popups;
@@ -12,6 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Navigation;
 using Xamarin.Essentials;
 
 namespace SuroboyoMaju.Shared.Pages
@@ -24,6 +26,7 @@ namespace SuroboyoMaju.Shared.Pages
         ObservableCollection<KomentarLaporan> listKomentar;
         Session session;
         HttpObject httpObject;
+        int mode = 0;
         public ReportDetailPage()
         {
             this.InitializeComponent();
@@ -117,17 +120,14 @@ namespace SuroboyoMaju.Shared.Pages
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            On_BackRequested();
-        }
-
-        private bool On_BackRequested()
-        {
-            if (this.Frame.CanGoBack)
+            if (mode == 1)
+            {
+                this.Frame.Navigate(typeof(AllCrimeReportPage));
+            }
+            else
             {
                 this.Frame.GoBack();
-                return true;
-            }
-            return false;
+            }  
         }
 
         private async void openMap(object sender, RoutedEventArgs e)
@@ -190,6 +190,15 @@ namespace SuroboyoMaju.Shared.Pages
             {
                 var messageBox = new MessageDialog("Komentar yang dimasukkan tidak boleh kosong!");
                 await messageBox.ShowAsync();
+            }
+        }
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            var entry = this.Frame.BackStack.LastOrDefault();
+            if (entry.SourcePageType == typeof(AllCrimeReportPage))
+            {
+                mode = 1;
             }
         }
     }

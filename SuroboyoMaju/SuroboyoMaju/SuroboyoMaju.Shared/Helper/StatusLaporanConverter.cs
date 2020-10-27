@@ -14,10 +14,15 @@ namespace SuroboyoMaju.Shared.Helper
             {
                 return "Belum diverifikasi";
             }
-            else if (status == 99)
+            else if (status == 2)
             {
                 return "Dibatalkan";
-            }else
+            }
+            else if (status == 99)
+            {
+                return "Ditolak";
+            }
+            else
             {
                 return "Sudah diverifikasi";
             }

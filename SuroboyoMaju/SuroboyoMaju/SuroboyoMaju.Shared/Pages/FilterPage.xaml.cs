@@ -68,7 +68,7 @@ namespace SuroboyoMaju.Shared.Pages
                 }
                 else
                 {
-
+                    session.setFilterState(1);
                     int id_kecamatan = rbSelectKecamatan.IsChecked == true ? Convert.ToInt32(cbKecamatan.SelectedValue.ToString()) : 0;
                     if (mode == 0)
                     {

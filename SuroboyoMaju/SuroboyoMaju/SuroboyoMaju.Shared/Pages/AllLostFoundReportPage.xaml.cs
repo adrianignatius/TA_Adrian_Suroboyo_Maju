@@ -28,7 +28,6 @@ namespace SuroboyoMaju.Shared.Pages
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            session.setFilterState(null);
             On_BackRequested();
         }
 
