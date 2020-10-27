@@ -123,6 +123,9 @@ namespace SuroboyoMaju.Shared.Pages
             if (mode == 1)
             {
                 this.Frame.Navigate(typeof(AllCrimeReportPage));
+            }else if (mode == 2)
+            {
+                this.Frame.Navigate(typeof(AllLostFoundReportPage));
             }
             else
             {
@@ -199,6 +202,9 @@ namespace SuroboyoMaju.Shared.Pages
             if (entry.SourcePageType == typeof(AllCrimeReportPage))
             {
                 mode = 1;
+            }else if (entry.SourcePageType == typeof(AllLostFoundReportPage))
+            {
+                mode = 2;
             }
         }
     }

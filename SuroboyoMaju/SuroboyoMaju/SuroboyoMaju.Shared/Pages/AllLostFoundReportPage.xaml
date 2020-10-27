@@ -39,6 +39,18 @@
                         </StackPanel>
                     </Button.Content>
                 </Button>
+                <StackPanel Name="stackPagination" Margin="0,12,12,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Visibility="Collapsed" Name="btnRefresh" Click="refreshPage" HorizontalAlignment="Left" Foreground="White" Background="Green" CornerRadius="10">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Text="Hapus filter"></TextBlock>
+                                <SymbolIcon Margin="4,0,0,0" Symbol="Cancel"></SymbolIcon>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <Button Click="prevPage" Visibility="Collapsed" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="btnPrevPage" Margin="4,0,0,0" CornerRadius="10" Foreground="White" Background="Green">Prev</Button>
+                    <Button Click="nextPage" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="btnNextPage" CornerRadius="10" Margin="4,0,0,0" Foreground="White" Background="Green">Next</Button>
+                </StackPanel>
             </StackPanel>
 
             <StackPanel Name="stackLoading" Margin="0,140,0,0" Visibility="Collapsed" Grid.Row="1">
@@ -51,14 +63,6 @@
             </StackPanel>
             <ScrollViewer Name="svListView" Grid.Row="1">
                 <StackPanel Margin="8" Orientation="Vertical">
-                    <Button Visibility="Collapsed" Name="btnRefresh" Click="refreshPage" Grid.Row="2" HorizontalAlignment="Left" Foreground="White" Background="Green" CornerRadius="10">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Text="Hapus filter"></TextBlock>
-                                <SymbolIcon Margin="4,0,0,0" Symbol="Cancel"></SymbolIcon>
-                            </StackPanel>
-                        </Button.Content>
-                    </Button>
                     <ListView Name="lvLaporanLostFound" ItemClick="goToDetailPage" SelectionMode="None" IsItemClickEnabled="True" Margin="0,16,0,0" >
                         <ListView.ItemTemplate>
                             <DataTemplate x:Name="ImageOverlayDataTemplate">
@@ -82,7 +86,6 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="0,8,0,8" Grid.Row="2" HorizontalAlignment="Center" Foreground="White" Background="Green" CornerRadius="10" Content="Muat lagi"></Button>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

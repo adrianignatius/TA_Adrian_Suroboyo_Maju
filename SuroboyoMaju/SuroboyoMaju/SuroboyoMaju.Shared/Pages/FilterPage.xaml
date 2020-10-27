@@ -8,6 +8,7 @@
     mc:Ignorable="d"
     Loaded="pageLoaded"
     RequestedTheme="Light"
+    FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -23,7 +24,7 @@
                 </Grid>
                 <StackPanel Name="stackLoading" Margin="0,140,0,0" Visibility="Collapsed">
                     <ProgressRing Width="150" Height="150" IsActive="True"></ProgressRing>
-                    <TextBlock Foreground="Black" FontWeight="Bold" TextAlignment="Center" TextWrapping="WrapWholeWords" FontSize="20" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Text="Sedang memuat data"></TextBlock>
+                    <TextBlock Foreground="Black" FontWeight="Bold" TextAlignment="Center" TextWrapping="WrapWholeWords" FontSize="20"  Text="Sedang memuat data"></TextBlock>
                 </StackPanel>
                 <StackPanel Name="stackFilter" Margin="20" Orientation="Vertical">
                     <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontSize="20" Text="Range Tanggal"></TextBlock>
@@ -85,8 +86,8 @@
                     </StackPanel>
                     <TextBlock Margin="0,8,0,0" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontSize="20" Text="Kecamatan"></TextBlock>
                     <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                        <RadioButton Checked="rbAllKecamatanChecked" Name="rbAllKecamatan" FontSize="17" Margin="0,0,20,0">Semua Kecamatan</RadioButton>
-                        <RadioButton Checked="rbSelectKecamatanChecked" Name="rbSelectKecamatan" FontSize="17">Pilih Kecamatan</RadioButton>
+                        <RadioButton FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Checked="rbAllKecamatanChecked" Name="rbAllKecamatan" FontSize="17" Margin="0,0,20,0">Semua Kecamatan</RadioButton>
+                        <RadioButton FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Checked="rbSelectKecamatanChecked" Name="rbSelectKecamatan" FontSize="17">Pilih Kecamatan</RadioButton>
                     </StackPanel>
                     <ComboBox FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="0,4,0,0" Name="cbKecamatan" HorizontalAlignment="Stretch"></ComboBox>
                     <GridView HorizontalAlignment="Stretch" Name="gvKecamatan">

@@ -2,16 +2,8 @@
 using Newtonsoft.Json.Linq;
 using SuroboyoMaju.Shared.Class;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.ServiceModel.Channels;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -22,7 +14,6 @@ namespace SuroboyoMaju.Shared.Pages
     {
         Session session;
         HttpObject httpObject;
-        User userLogin;
         ObservableCollection<LaporanKriminalitas> listLaporanKriminalitas = new ObservableCollection<LaporanKriminalitas>();
         int page = 0;
         int jumlah_laporan = 0;
@@ -31,23 +22,14 @@ namespace SuroboyoMaju.Shared.Pages
             this.InitializeComponent();
             session = new Session();
             httpObject = new HttpObject();
-            userLogin = session.getUserLogin();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            On_BackRequested();
+            session.setFilterState(0);
+            this.Frame.GoBack();
         }
 
-        private bool On_BackRequested()
-        {
-            if (this.Frame.CanGoBack)
-            {
-                this.Frame.GoBack();
-                return true;
-            }
-            return false;
-        }
 
         private async void loadLaporanKriminalitas()
         {
@@ -86,8 +68,13 @@ namespace SuroboyoMaju.Shared.Pages
 
         private void refreshPage(object sender, RoutedEventArgs e)
         {
-            jumlah_laporan = session.getJumlahLaporanState();
+            page = 0;
+            setJumlahLaporan();
             btnRefresh.Visibility = Visibility.Collapsed;
+            btnPrevPage.Visibility = Visibility.Collapsed;
+            btnNextPage.Visibility = Visibility.Visible;
+            stackEmpty.Visibility = Visibility.Collapsed;
+            session.setFilterState(0);
             loadLaporanKriminalitas();
         }
 
@@ -104,32 +91,59 @@ namespace SuroboyoMaju.Shared.Pages
         {
             page++;
             int jumlah = (page+1) * 5;
-            loadLaporanKriminalitas();
-            btnPrevPage.Visibility = Visibility.Visible;
-            if (jumlah > jumlah_laporan)
+            if (session.getFilterState() == 0)
             {
-                btnNextPage.Visibility = Visibility.Collapsed;
+                loadLaporanKriminalitas();
             }
             else
             {
-                btnNextPage.Visibility = Visibility.Visible;
+                loadLaporanKriminalitasWithFilter();
             }
-            
+            btnPrevPage.Visibility = Visibility.Visible;
+            btnNextPage.Visibility = jumlah > jumlah_laporan ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void prevPage(object sender, RoutedEventArgs e)
         {
             page--;
             btnNextPage.Visibility = Visibility.Visible;
-            if (page == 0)
+            if (session.getFilterState() == 0)
             {
-                btnPrevPage.Visibility = Visibility.Collapsed;
+                loadLaporanKriminalitas();
             }
             else
             {
-                btnPrevPage.Visibility = Visibility.Visible;
+                loadLaporanKriminalitasWithFilter();
             }
-            loadLaporanKriminalitas();
+            btnPrevPage.Visibility = page == 0 ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private async void loadLaporanKriminalitasWithFilter()
+        {
+            FilterParams param = session.getFilterParams();
+            string reqUri = "laporan/getLaporanKriminalitasWithFilter/"+page+"?tanggal_awal=" + param.tanggal_awal + "&tanggal_akhir=" + param.tanggal_akhir + "&id_kejadian=" + param.getArrayIdKategori() + "&id_kecamatan=" + param.id_kecamatan;
+            string responseData = await httpObject.GetRequestWithAuthorization(reqUri, session.getTokenAuthorization());
+            listLaporanKriminalitas = JsonConvert.DeserializeObject<ObservableCollection<LaporanKriminalitas>>(responseData);
+            if (listLaporanKriminalitas.Count == 0)
+            {
+                stackEmpty.Visibility = Visibility.Visible;
+                svListView.Visibility = Visibility.Collapsed;
+                stackLoading.Visibility = Visibility.Collapsed;
+                txtEmptyState.Text = "Tidak ada laporan yang sesuai dengan kriteria pencarian";
+            }
+            else
+            {
+                hideLoading();
+                lvLaporanKriminalitas.ItemsSource = listLaporanKriminalitas;
+            }
+        }
+
+        private async void setJumlahLaporan()
+        {
+            string responseData = await httpObject.GetRequestWithAuthorization("laporan/getJumlahLaporanKriminalitas", session.getTokenAuthorization());
+            JObject json = JObject.Parse(responseData);
+            jumlah_laporan = Convert.ToInt32(json["count"].ToString());
+            session.setJumlahLaporanState(jumlah_laporan);
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -138,42 +152,38 @@ namespace SuroboyoMaju.Shared.Pages
             var entry = this.Frame.BackStack.LastOrDefault();
             if (entry.SourcePageType == typeof(FilterPage))
             {
-                btnRefresh.Visibility = Visibility.Visible;
                 showLoading();
+                this.Frame.BackStack.RemoveAt(this.Frame.BackStackDepth - 1);
+                this.Frame.BackStack.RemoveAt(this.Frame.BackStackDepth - 1);
                 FilterParams param = session.getFilterParams();
-                this.Frame.BackStack.RemoveAt(this.Frame.BackStackDepth - 1);
-                this.Frame.BackStack.RemoveAt(this.Frame.BackStackDepth - 1);
-                string reqUri = "laporan/getLaporanKriminalitasWithFilter?tanggal_awal=" + param.tanggal_awal + "&tanggal_akhir=" + param.tanggal_akhir + "&id_kejadian=" + param.getArrayIdKategori() + "&id_kecamatan=" + param.id_kecamatan;
+                string reqUri = "laporan/getJumlahLaporanKriminalitasWithFilter?tanggal_awal=" + param.tanggal_awal + "&tanggal_akhir=" + param.tanggal_akhir + "&id_kejadian=" + param.getArrayIdKategori() + "&id_kecamatan=" + param.id_kecamatan;
                 string responseData = await httpObject.GetRequestWithAuthorization(reqUri, session.getTokenAuthorization());
-                listLaporanKriminalitas = JsonConvert.DeserializeObject<ObservableCollection<LaporanKriminalitas>>(responseData);
-                if (listLaporanKriminalitas.Count == 0)
-                {
-                    stackEmpty.Visibility = Visibility.Visible;
-                    svListView.Visibility = Visibility.Collapsed;
-                    stackLoading.Visibility = Visibility.Collapsed;
-                    txtEmptyState.Text = "Tidak ada laporan yang sesuai dengan kriteria pencarian";
-                }
-                else
-                {
-                    hideLoading();
-                    lvLaporanKriminalitas.ItemsSource = listLaporanKriminalitas;
-                }
-            }else if (entry.SourcePageType == typeof(ReportDetailPage))
+                JObject json = JObject.Parse(responseData);
+                jumlah_laporan = Convert.ToInt32(json["count"].ToString());
+                session.setJumlahLaporanState(jumlah_laporan);
+                btnRefresh.Visibility = Visibility.Visible;
+                loadLaporanKriminalitasWithFilter();
+                btnNextPage.Visibility = jumlah_laporan < 6 ? Visibility.Collapsed : Visibility.Visible;
+            }
+            else if (entry.SourcePageType == typeof(ReportDetailPage))
             {
-                jumlah_laporan = session.getJumlahLaporanState();
+                this.Frame.BackStack.RemoveAt(this.Frame.BackStackDepth - 1);
+                this.Frame.BackStack.RemoveAt(this.Frame.BackStackDepth - 1);
+                int searchMode = session.getFilterState();
                 page = session.getPageState();
-                loadLaporanKriminalitas();
-                this.Frame.BackStack.RemoveAt(this.Frame.BackStackDepth - 1);
-                this.Frame.BackStack.RemoveAt(this.Frame.BackStackDepth - 1);
+                jumlah_laporan = session.getJumlahLaporanState();
+                if (searchMode == 0){
+                    loadLaporanKriminalitas();
+                }else{
+                    loadLaporanKriminalitasWithFilter();
+                    btnRefresh.Visibility = Visibility.Visible;
+                }   
                 btnPrevPage.Visibility = page != 0 ? Visibility.Visible : Visibility.Collapsed;
                 btnNextPage.Visibility = (page + 1) * 5 > jumlah_laporan ? Visibility.Collapsed : Visibility.Visible;
             }
             else
             {
-                string responseData = await httpObject.GetRequestWithAuthorization("laporan/getJumlahLaporanKriminalitas", session.getTokenAuthorization());
-                JObject json = JObject.Parse(responseData);
-                jumlah_laporan = Convert.ToInt32(json["count"].ToString());
-                session.setJumlahLaporanState(jumlah_laporan);
+                setJumlahLaporan();
                 loadLaporanKriminalitas();
             }
         }
