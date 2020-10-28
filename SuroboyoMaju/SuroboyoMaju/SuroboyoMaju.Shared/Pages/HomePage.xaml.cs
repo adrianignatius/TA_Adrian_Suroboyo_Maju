@@ -2,12 +2,14 @@
 using Newtonsoft.Json.Linq;
 using SuroboyoMaju.Shared.Class;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Xamarin.Essentials;
-
 
 namespace SuroboyoMaju.Shared.Pages
 {
@@ -130,8 +132,7 @@ namespace SuroboyoMaju.Shared.Pages
                     });
                     await httpObject.PostRequestUrlEncodedWithAuthorization("user/sendEmergencyNotification", content,session.getTokenAuthorization());
                 }
-                var message = new MessageDialog("Pesan darurat telah dikirimkan ke semua kontak darurat anda");
-                await message.ShowAsync();
+                await new MessageDialog("Pesan darurat telah dikirimkan ke semua kontak darurat anda").ShowAsync();
             }
         }
 

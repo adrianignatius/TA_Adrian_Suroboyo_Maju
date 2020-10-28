@@ -38,8 +38,8 @@
                         <Setter Target="column1.Width" Value="3*"></Setter>
                         <Setter Target="column2.Width" Value="2*"></Setter>
                         <Setter Target="appIconBg.Height" Value="0"></Setter>
-                        <Setter Target="imgAppIcon.Width" Value="350"></Setter>
-                        <Setter Target="imgAppIcon.Height" Value="450"></Setter>
+                        <Setter Target="imgAppIcon.Width" Value="300"></Setter>
+                        <Setter Target="imgAppIcon.Height" Value="300"></Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -51,7 +51,7 @@
             </Grid.ColumnDefinitions>
             <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
                 <StackPanel x:Name="rootPanel" Margin="20" Orientation="Vertical">
-                    <Image Name="appIconBg" Source="/Assets/app-logobesar.png" Width="200" Height="200"></Image>
+                    <Image Name="appIconBg" Source="/Assets/app-logo.png" Width="200" Height="200"></Image>
                     <TextBlock Style="{StaticResource textBlockStyle}" Name="textBlockRegister" Foreground="Black" FontSize="36" Margin="30,30,0,0" FontWeight="ExtraBold">Register</TextBlock>
                     <TextBlock Style="{StaticResource textBlockStyle}" TextWrapping="Wrap" Margin="30,10,0,20" Foreground="Black" FontSize="15" >Already have an account? <Hyperlink Click="goToLogin">Login with your account here</Hyperlink></TextBlock>
                     <TextBlock Style="{StaticResource textBlockStyle}" x:Name="textBlockFullName"  FontSize="20" Margin="30,0,0,0">Nama Lengkap *</TextBlock>
@@ -78,11 +78,13 @@
 
             <Grid Grid.Column="0">
                 <Grid.Background>
-                    <ImageBrush Opacity="0.7" Stretch="Fill" ImageSource="/Assets/bg.jpg"></ImageBrush>
+                    <ImageBrush Opacity="1" Stretch="Fill" ImageSource="/Assets/bg.jpg"></ImageBrush>
                 </Grid.Background>
-                <StackPanel>
-                    <Image Name="imgAppIcon" Source="/Assets/app-logobesar.png" Width="500" Height="500" HorizontalAlignment="Center"></Image>
-                    <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" x:Name="textBlockDescApp" FontWeight="SemiBold" Foreground="Black" HorizontalAlignment="Stretch" Margin="20,-40,20,0" FontSize="30" TextAlignment="Center" Text="A platform that connects people to share lost &amp; found information and also crime activity around you." TextWrapping="Wrap"></TextBlock>
+                <StackPanel Margin="20">
+                    <Image Name="imgAppIcon" Source="/Assets/logo-bg.png" Width="300" Height="300" HorizontalAlignment="Center"></Image>
+                    <TextBlock FontFamily="ms-appx:///Assets/Fonts/Rancho-Regular.ttf#Rancho" FontWeight="Bold" Foreground="White" HorizontalAlignment="Stretch" Margin="20,20,20,0" FontSize="60" TextAlignment="Center" Text="Suroboyo Maju" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" x:Name="textBlockDescApp" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Stretch" Margin="20,40,20,0" FontSize="30" TextAlignment="Center" Text="Platform yang menghubungkan pengguna 
+untuk saling berbagi informasi seputar keadaan di Surabaya" TextWrapping="Wrap"></TextBlock>
                 </StackPanel>
             </Grid>
         </Grid>

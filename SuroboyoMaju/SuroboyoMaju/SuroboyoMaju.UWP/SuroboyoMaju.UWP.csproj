@@ -145,6 +145,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Assets\Fonts\Alata-Regular.ttf" />
+    <Content Include="Assets\Fonts\Rancho-Regular.ttf" />
     <None Include="SuroboyoMaju.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

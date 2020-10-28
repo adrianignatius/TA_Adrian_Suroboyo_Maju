@@ -23,8 +23,22 @@ namespace SuroboyoMaju.Shared.Pages
             this.InitializeComponent();
             httpObject = new HttpObject();
         }
+
+        private void showLoading()
+        {
+            stackLoading.Visibility = Visibility.Visible;
+            gvListKantorPolisi.Visibility = Visibility.Collapsed;
+        }
+
+        private void hideLoading()
+        {
+            stackLoading.Visibility = Visibility.Collapsed;
+            gvListKantorPolisi.Visibility = Visibility.Visible;
+        }
+
         public async void pageLoaded(object sender, RoutedEventArgs e)
         {
+            showLoading();
             session = new Session();
             var location = await Geolocation.GetLastKnownLocationAsync();
             if (location == null)
@@ -59,6 +73,7 @@ namespace SuroboyoMaju.Shared.Pages
             }
             listKantorPolisi = new ObservableCollection<KantorPolisi>(listKantorPolisi.OrderBy(k => k.distance));
             gvListKantorPolisi.ItemsSource = listKantorPolisi;
+            hideLoading();
         }
 
         public void goToDetail(object sender, ItemClickEventArgs e)

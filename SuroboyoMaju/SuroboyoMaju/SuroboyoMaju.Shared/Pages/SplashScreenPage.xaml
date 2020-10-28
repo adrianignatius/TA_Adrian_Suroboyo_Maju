@@ -12,7 +12,7 @@
 
     <Grid Background="Wheat">
         <Grid Width="300" Height="300" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-            <Image Source="/Assets/app-logobesar.png"></Image>
+            <Image Source="/Assets/app-logo.png"></Image>
         </Grid>
     </Grid>
 </Page>

@@ -3,9 +3,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SuroboyoMaju.Shared.Helper"
+    xmlns:android="http://uno.ui/android"
+    xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    mc:Ignorable="d android"
     RequestedTheme="Light"
     Loaded="pageLoaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -13,8 +15,67 @@
     <Page.Resources>
         <local:ImageSourceKantorPolisiConverter x:Key="imageConverter"/>
         <SolidColorBrush x:Key="brushTransparent" Color="Black" Opacity="0.5"></SolidColorBrush>
+        <DataTemplate x:Name="androidTemplate">
+            <Border Margin="0,4,0,4" CornerRadius="10" BorderBrush="Gray" BorderThickness="1">
+                <Grid Height="240">
+                    <Image Source="{Binding nama_file_gambar,Converter={StaticResource imageConverter}}" Stretch="UniformToFill"/>
+                    <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Background="{StaticResource brushTransparent}" Padding="12">
+                        <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Opacity="1" Foreground="White" FontSize="16" Text="{Binding nama_kantor_polisi }"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                            <Image Margin="0,0,4,0" Width="20" Height="20" Source="/Assets/icon/location-icon.png"></Image>
+                            <TextBlock Foreground="White" FontSize="14" Text="{Binding distance}"/>
+                            <TextBlock Opacity="1" Foreground="White" FontSize="14" Text="Km" ></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Name="uwpTemplate">
+            <Grid Margin="0,4,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Opacity="1" Foreground="Black" FontSize="20" Text="{Binding nama_kantor_polisi }"/>
+                    <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="0,4,0,0" Opacity="1" Foreground="Black" FontSize="18" Text="{Binding alamat_kantor_polisi}" ></TextBlock>
+                    <StackPanel Margin="0,4,0,0" Orientation="Horizontal">
+                        <SymbolIcon Symbol="PhoneBook" Foreground="Red"></SymbolIcon>
+                        <TextBlock  FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"  Margin="4,0,0,0" Opacity="1" Foreground="Black" FontSize="18" Text="{Binding notelp_kantor_polisi}" ></TextBlock>
+                    </StackPanel>
+                    <StackPanel Margin="0,4,0,0" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <SymbolIcon Symbol="MapPin" Foreground="Red"></SymbolIcon>
+                        <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Foreground="Black" FontSize="18" Text="{Binding distance}"/>
+                        <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Opacity="1" Foreground="Black" FontSize="18" Text="Km" ></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Image Width="300" Height="200" Source="{Binding nama_file_gambar,Converter={StaticResource imageConverter}}" Stretch="UniformToFill"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
     <Grid Margin="5">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="gvListKantorPolisi.ItemTemplate" Value="{StaticResource androidTemplate}"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="gvListKantorPolisi.ItemTemplate" Value="{StaticResource uwpTemplate}"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -30,7 +91,11 @@
                     <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Grid.Column="1" Name="txtJudulHalaman" Text="Data Kantor Polisi" TextWrapping="WrapWholeWords" Margin="12,4,0,0" FontSize="24" FontWeight="Bold" ></TextBlock>
                 </Grid>
             </StackPanel>
-            <ListView Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="goToDetail" Margin="0,10,0,0" Name="gvListKantorPolisi">
+            <StackPanel Name="stackLoading" Margin="0,140,0,0" Visibility="Collapsed" Grid.Row="1">
+                <ProgressRing Width="150" Height="150" IsActive="True"></ProgressRing>
+                <TextBlock Foreground="Black" FontWeight="Bold" TextAlignment="Center" TextWrapping="WrapWholeWords" FontSize="20" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Text="Sedang memuat data"></TextBlock>
+            </StackPanel>
+            <android:ListView Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="goToDetail" Margin="0,10,0,0" Name="gvListKantorPolisi">
                 <ListView.ItemTemplate>
                     <DataTemplate x:Name="ImageOverlayDataTemplate">
                         <Border Margin="0,4,0,4" CornerRadius="10" BorderBrush="Gray" BorderThickness="1">
@@ -48,7 +113,14 @@
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </android:ListView>
+            <win:ListView ItemTemplate="{StaticResource androidTemplate}" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="goToDetail" Margin="0,10,0,0" Name="gvListKantorPolisi">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </win:ListView>
         </Grid>
     </Grid>
 </Page>

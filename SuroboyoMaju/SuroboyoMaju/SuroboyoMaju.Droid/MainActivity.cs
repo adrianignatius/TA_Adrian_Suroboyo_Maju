@@ -17,6 +17,7 @@ namespace SuroboyoMaju.Droid
         {
             base.OnCreate(bundle);
 			Xamarin.Essentials.Platform.Init(this, bundle);
+			
 		}
 
 		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)

@@ -11,14 +11,33 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <ScrollViewer>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="txtNamaKantorPolisi.FontSize" Value="30"></Setter>
+                        <Setter Target="canvasImage.Visibility" Value="Collapsed"></Setter>
+                        <Setter Target="stackGambarUWP.Visibility" Value="Visible"></Setter>
+                        <Setter Target="btnBackUWP.Visibility" Value="Visible"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid>
             <StackPanel Orientation="Vertical">
+                <Button Name="btnBackUWP" Visibility="Collapsed" Click="Back_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
                 <Canvas Name="canvasImage" Height="280">
                     <Button Click="Back_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
                 </Canvas>
                 <Grid Margin="20">
                     <StackPanel Orientation="Vertical">
                         <TextBlock FontWeight="Bold" HorizontalAlignment="Center" FontSize="24" Name="txtNamaKantorPolisi"></TextBlock>
+                        <StackPanel Visibility="Collapsed" Margin="0,4,0,0" Name="stackGambarUWP">
+                            <Image Stretch="UniformToFill" Source="http://adrian-assets.ta-istts.com/KP001.jpg" MaxWidth="500" MaxHeight="400"></Image>
+                        </StackPanel>
                         <Border CornerRadius="10" Margin="0,15,0,0" BorderBrush="LightBlue" Background="LightGray">
                             <StackPanel Padding="10" Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
