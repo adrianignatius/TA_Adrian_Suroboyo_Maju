@@ -15,7 +15,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Xamarin.Essentials;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+#if __ANDROID__
+using Com.OneSignal;
+using Com.OneSignal.Abstractions;
+#endif
 
 namespace SuroboyoMaju.Shared.Pages
 {
@@ -57,6 +60,9 @@ namespace SuroboyoMaju.Shared.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+#if __ANDROID__
+            OneSignal.Current.AddTrigger("firstLogin", "true");
+#endif
             session.setHomeNavigationPageInstance(this);
         }
 

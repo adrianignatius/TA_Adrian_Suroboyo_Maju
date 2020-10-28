@@ -15,7 +15,7 @@
     <Page.Resources>
         <local:ImageSourceKantorPolisiConverter x:Key="imageConverter"/>
         <SolidColorBrush x:Key="brushTransparent" Color="Black" Opacity="0.5"></SolidColorBrush>
-        <DataTemplate x:Name="androidTemplate">
+        <DataTemplate x:Key="androidTemplate">
             <Border Margin="0,4,0,4" CornerRadius="10" BorderBrush="Gray" BorderThickness="1">
                 <Grid Height="240">
                     <Image Source="{Binding nama_file_gambar,Converter={StaticResource imageConverter}}" Stretch="UniformToFill"/>
@@ -30,7 +30,7 @@
                 </Grid>
             </Border>
         </DataTemplate>
-        <DataTemplate x:Name="uwpTemplate">
+        <DataTemplate x:Key="uwpTemplate">
             <Grid Margin="0,4,0,4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -55,17 +55,10 @@
             </Grid>
         </DataTemplate>
     </Page.Resources>
+    
     <Grid Margin="5">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"></AdaptiveTrigger>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="gvListKantorPolisi.ItemTemplate" Value="{StaticResource androidTemplate}"></Setter>
-                    </VisualState.Setters>
-                </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="600"></AdaptiveTrigger>

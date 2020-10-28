@@ -26,6 +26,7 @@ namespace SuroboyoMaju.Shared.Pages
             this.InitializeComponent();
             session = new Session();
             httpObject = new HttpObject();
+            
         }
         public async void pageLoaded(object sender, RoutedEventArgs e)
         {

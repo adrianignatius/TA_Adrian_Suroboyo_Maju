@@ -16,7 +16,7 @@
         <SolidColorBrush x:Key="brushTransparent" Color="Black" Opacity="0.7"></SolidColorBrush>
         <local:DatetimeConverter x:Key="dateTimeConverter"/>
         <local:ImageLaporanConverter x:Key="imageConverter"/>
-        <DataTemplate x:Name="androidTemplate">
+        <DataTemplate x:Key="androidTemplate">
             <Border Margin="0,4,0,4" CornerRadius="10" BorderBrush="Gray" BorderThickness="1">
                 <Grid MaxHeight="280">
                     <Image Source="{Binding thumbnail_gambar,Converter={StaticResource imageConverter}}" Stretch="UniformToFill"/>
@@ -39,7 +39,7 @@
                 </Grid>
             </Border>
         </DataTemplate>
-        <DataTemplate x:Name="uwpTemplate">
+        <DataTemplate x:Key="uwpTemplate">
             <Border BorderBrush="LightGray" BorderThickness="1">
                 <Grid>
                     <Grid.ColumnDefinitions>

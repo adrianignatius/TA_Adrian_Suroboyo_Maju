@@ -6,6 +6,12 @@ using Android.Views;
 
 namespace SuroboyoMaju.Droid
 {
+	[Service]
+	public class SimpleService : Service
+    {
+
+    }
+
 	[Activity(
 			MainLauncher = true,
 			ConfigurationChanges = global::Uno.UI.ActivityHelper.AllConfigChanges,
