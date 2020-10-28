@@ -3,14 +3,11 @@ using Android.Widget;
 using Android.OS;
 using Android.Content.PM;
 using Android.Views;
+using Android.Content;
 
 namespace SuroboyoMaju.Droid
 {
-	[Service]
-	public class SimpleService : Service
-    {
 
-    }
 
 	[Activity(
 			MainLauncher = true,
@@ -23,7 +20,7 @@ namespace SuroboyoMaju.Droid
         {
             base.OnCreate(bundle);
 			Xamarin.Essentials.Platform.Init(this, bundle);
-			
+			StartService(new Intent(this, typeof(SimpleService)));
 		}
 
 		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)

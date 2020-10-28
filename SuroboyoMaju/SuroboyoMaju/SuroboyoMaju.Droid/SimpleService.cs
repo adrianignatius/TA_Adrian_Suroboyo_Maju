@@ -1,14 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Runtime;
 using Android.Util;
+using Android.Views;
+using Android.Widget;
 
 namespace SuroboyoMaju.Droid
 {
     [Service]
-    class SimpleService : Service
+    class SimpleService:Service
     {
         static readonly string TAG = "X:" + typeof(SimpleService).Name;
         static readonly int TimerWait = 4000;
