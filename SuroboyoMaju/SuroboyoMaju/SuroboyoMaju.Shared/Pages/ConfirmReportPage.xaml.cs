@@ -36,7 +36,10 @@ namespace SuroboyoMaju.Shared.Pages
             param = session.getConfirmReportParams();
             imageIcon.Source = new BitmapImage(new Uri(url + param.kategori_selected.file_gambar_kategori));
             txtJenisLaporan.Text = param.kategori_selected.nama_kategori;
-            txtTanggalLaporan.Text = param.tanggal_laporan;
+            DateTime dateTime = DateTime.Parse(param.tanggal_laporan);
+            string tanggal = dateTime.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID"));
+            string waktu = DateTime.Now.ToString("H:m:ss");
+            txtTanggalLaporan.Text = tanggal+" Pukul "+waktu;
             txtJudulLaporan.Text = param.judul_laporan;
             txtDeskripsiLaporan.Text = param.deskripsi_laporan;
             txtLokasiLaporan.Text = param.alamat_laporan;

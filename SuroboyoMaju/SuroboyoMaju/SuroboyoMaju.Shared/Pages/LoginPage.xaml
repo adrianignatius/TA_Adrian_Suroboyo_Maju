@@ -60,7 +60,7 @@
                     <TextBlock Style="{StaticResource textBlockStyle}" Name="textBlockPassword" FontSize="20" Margin="30,15,0,0">Password *</TextBlock>
                     <PasswordBox Name="txtPassword" Padding="8" Foreground="Black" Margin="30,15,30,0" FontSize="20" Height="50" ></PasswordBox>
                     <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Click="login" Foreground="AntiqueWhite" x:Name="btnLogin" Background="DarkGreen" FontWeight="SemiBold" Padding="15" Content="Login" HorizontalAlignment="Stretch" Margin="30,35,30,0" FontSize="30" />
-                    <ProgressRing Name="progressRing" HorizontalAlignment="Center" IsActive="True" Visibility="Collapsed" Width="150" Height="150"></ProgressRing>
+                    <ProgressRing Margin="0,8,0,0" Name="progressRing" HorizontalAlignment="Center" IsActive="True" Visibility="Collapsed" Width="100" Height="100"></ProgressRing>
                 </StackPanel>
             </ScrollViewer>
 

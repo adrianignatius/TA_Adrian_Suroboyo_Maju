@@ -14,6 +14,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Xamarin.Essentials;
+using Windows.UI.Popups;
+using System.Threading;
+using Newtonsoft.Json.Linq;
 
 #if __ANDROID__
 using Com.OneSignal;
@@ -58,10 +61,21 @@ namespace SuroboyoMaju.Shared.Pages
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
 #if __ANDROID__
+            var status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
             OneSignal.Current.AddTrigger("firstLogin", "true");
+            var request = new GeolocationRequest(GeolocationAccuracy.Best,TimeSpan.FromSeconds(30));
+            System.Threading.CancellationTokenSource cts = new System.Threading.CancellationTokenSource();
+            var location = await Geolocation.GetLocationAsync(request,cts.Token);
+            string queryParams = "?lat=" + location.Latitude + "&lng=" + location.Longitude;
+            if (location != null)
+            {
+                string responseData = await new HttpObject().PutRequest("user/updateLocation/" + session.getUserLogin().id_user+queryParams,null,session.getTokenAuthorization());
+                JObject json = JObject.Parse(responseData);
+                await new MessageDialog(json["status"].ToString()).ShowAsync();
+            }
 #endif
             session.setHomeNavigationPageInstance(this);
         }
@@ -93,7 +107,7 @@ namespace SuroboyoMaju.Shared.Pages
                     break;
 
                 case "ProfilePage":
-                    ContentFrame.Navigate(typeof(ProfilePage));
+                    this.Frame.Navigate(typeof(ProfilePage));
                     break;
 
                 case "chatPage":

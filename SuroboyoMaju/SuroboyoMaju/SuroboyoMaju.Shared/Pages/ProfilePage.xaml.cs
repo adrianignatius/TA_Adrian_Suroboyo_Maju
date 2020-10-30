@@ -41,6 +41,11 @@ namespace SuroboyoMaju.Shared.Pages
             dispatcherTimer.Tick += DispatcherTimer_Tick;
         }
 
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
+
         private void DispatcherTimer_Tick(object sender, object e)
         {
             tick++;

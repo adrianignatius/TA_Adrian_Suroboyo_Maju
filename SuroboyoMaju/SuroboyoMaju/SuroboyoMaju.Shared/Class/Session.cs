@@ -18,6 +18,8 @@ namespace SuroboyoMaju.Shared.Class
 
         private static HomeNavigationPage pageInstance { get; set; }
 
+        private static HomeNavigationPageKepalaKeamanan homePageKepalaKeamananInstance { get; set; }
+
         private static FilterParams filterParams { get; set; }
 
         private static ReportDetailPageParams reportDetailPageParam { get; set; }
@@ -51,6 +53,16 @@ namespace SuroboyoMaju.Shared.Class
         public int getPageState()
         {
             return pageState;
+        }
+
+        public void setHomeNavigationPageKepalaKeamananInstance(HomeNavigationPageKepalaKeamanan page)
+        {
+            homePageKepalaKeamananInstance = page;
+        }
+
+        public HomeNavigationPageKepalaKeamanan getHomePageKepalaKeamananInstance()
+        {
+            return homePageKepalaKeamananInstance;
         }
 
         public void setHomeNavigationPageInstance(HomeNavigationPage page)

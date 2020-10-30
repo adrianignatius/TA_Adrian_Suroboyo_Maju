@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SuroboyoMaju.Shared.Class;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,22 +8,18 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Xamarin.Essentials;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SuroboyoMaju.Shared.Pages
 {
     public sealed partial class HomeNavigationPageKepalaKeamanan : Page
     {
+        Session session;
         public HomeNavigationPageKepalaKeamanan()
         {
             this.InitializeComponent();
+            session = new Session();
         }
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
@@ -52,6 +49,12 @@ namespace SuroboyoMaju.Shared.Pages
             }
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            session.setHomeNavigationPageKepalaKeamananInstance(this);
+        }
+
         private void NavView_Navigate(NavigationViewItem item)
         {
             switch (item.Tag)
@@ -67,6 +70,12 @@ namespace SuroboyoMaju.Shared.Pages
                     break;
                 case "AreaReportPage":
                     this.Frame.Navigate(typeof(LaporanKepalaKeamananPage));
+                    break;
+                case "contactPage":
+                    ContentFrame.Navigate(typeof(ContactPage));
+                    break;
+                case "chatPage":
+                    this.Frame.Navigate(typeof(ChatListPage));
                     break;
                 case "SignOut":
                     this.Frame.Navigate(typeof(LoginPage));

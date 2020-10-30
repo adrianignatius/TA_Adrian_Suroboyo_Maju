@@ -65,7 +65,6 @@ namespace SuroboyoMaju.Shared.Pages
             string responseData = await httpObject.GetRequestWithAuthorization("kepalaKeamanan/getJumlahLaporanKriminalitasKecamatan/"+userLogin.id_kecamatan_user, session.getTokenAuthorization());
             JObject json = JObject.Parse(responseData);
             jumlah_laporan = Convert.ToInt32(json["count"].ToString());
-            await new MessageDialog(jumlah_laporan.ToString()).ShowAsync();
             session.setJumlahLaporanState(jumlah_laporan);
             btnNextPage.Visibility = jumlah_laporan < 6 ? Visibility.Collapsed : Visibility.Visible;
             loadLaporanKriminalitas();

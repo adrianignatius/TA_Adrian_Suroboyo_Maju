@@ -109,7 +109,7 @@ namespace SuroboyoMaju.Shared.Pages
                     new KeyValuePair<string, string>("id_laporan", param.id_laporan),
                     new KeyValuePair<string, string>("id_user", userLogin.id_user.ToString())
                 });
-                string responseData = await httpObject.PostRequestWithUrlEncoded("laporan/konfirmasiLaporanKriminalitas", content);
+                string responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("laporan/konfirmasiLaporanKriminalitas", content,session.getTokenAuthorization());
                 JObject json = JObject.Parse(responseData);
                 var messageDialog = new MessageDialog(json["message"].ToString());
                 await messageDialog.ShowAsync();

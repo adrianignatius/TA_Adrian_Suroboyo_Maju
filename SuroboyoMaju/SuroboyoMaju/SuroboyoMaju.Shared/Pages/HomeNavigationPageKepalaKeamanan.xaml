@@ -27,6 +27,8 @@
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Content="Area pengawasan saya" Icon="Admin" Tag="AreaReportPage"></NavigationViewItem>
+            <NavigationViewItem x:Uid="contactPage" Icon="Contact" Content="Kontak Saya" Tag="contactPage"/>
+            <NavigationViewItem x:Uid="chatPage" Icon="Message" Content="Chat" Tag="chatPage"/>
             <NavigationViewItem x:Uid="HomeNavItem" Content="Sign Out" Tag="SignOut">
                 <NavigationViewItem.Icon>
                     <BitmapIcon UriSource="/Assets/icon/signout.png"/>

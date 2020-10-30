@@ -20,7 +20,6 @@ namespace SuroboyoMaju.Droid
         {
             base.OnCreate(bundle);
 			Xamarin.Essentials.Platform.Init(this, bundle);
-			StartService(new Intent(this, typeof(SimpleService)));
 		}
 
 		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)

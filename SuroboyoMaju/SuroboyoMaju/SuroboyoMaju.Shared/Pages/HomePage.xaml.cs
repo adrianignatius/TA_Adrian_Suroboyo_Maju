@@ -195,14 +195,27 @@ namespace SuroboyoMaju.Shared.Pages
         private void goToAllReportPage(object sender, RoutedEventArgs e)
         {
             string tag = (sender as TextBlock).Tag.ToString();
-            HomeNavigationPage page = session.getHomeNavigationPageInstance();
             if (tag == "kriminalitas")
             {
-                page.Frame.Navigate(typeof(AllCrimeReportPage));
+                if (userLogin.status_user == 2)
+                {
+                    session.getHomePageKepalaKeamananInstance().Frame.Navigate(typeof(AllCrimeReportPage));
+                }
+                else
+                {
+                    session.getHomeNavigationPageInstance().Frame.Navigate(typeof(AllCrimeReportPage));
+                }
             }
             else
             {
-                page.Frame.Navigate(typeof(AllLostFoundReportPage));
+                if (userLogin.status_user == 2)
+                {
+                    session.getHomePageKepalaKeamananInstance().Frame.Navigate(typeof(AllCrimeReportPage));
+                }
+                else
+                {
+                    session.getHomeNavigationPageInstance().Frame.Navigate(typeof(AllCrimeReportPage));
+                }
             }
         }
     }
