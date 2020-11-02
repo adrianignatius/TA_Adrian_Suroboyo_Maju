@@ -1,0 +1,14 @@
+﻿<Page
+    x:Class="SuroboyoMaju.Shared.Pages.ImageZoomPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SuroboyoMaju.Shared.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="Black">
+        <Image MaxWidth="700" MaxHeight="700" Stretch="UniformToFill" Rotation="180" Source="http://adrian-assets.ta-istts.com/KP024.jpg"></Image>
+    </Grid>
+</Page>

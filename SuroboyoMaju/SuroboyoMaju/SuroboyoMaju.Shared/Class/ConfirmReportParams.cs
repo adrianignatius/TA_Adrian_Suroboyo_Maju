@@ -27,7 +27,11 @@ namespace SuroboyoMaju.Shared.Class
 
         public UploadedImage image_laporan { get; set; }
 
-        public ConfirmReportParams(string tag_laporan,string judul_laporan, string jenis_laporan, string deskripsi_laporan, string lat_laporan, string lng_laporan, string alamat_laporan, int id_kecamatan, SettingKategori kategori_selected, int combo_box_selected_index, UploadedImage image_laporan)
+        public string tanggal_laporan { get; set; }
+        
+        public string waktu_laporan { get; set; }
+
+        public ConfirmReportParams(string tag_laporan,string judul_laporan, string jenis_laporan, string deskripsi_laporan, string lat_laporan, string lng_laporan, string alamat_laporan, int id_kecamatan, SettingKategori kategori_selected, int combo_box_selected_index, UploadedImage image_laporan,string tanggal_laporan,string waktu_laporan)
         {
             this.tag_laporan = tag_laporan;
             this.judul_laporan = judul_laporan;
@@ -40,6 +44,8 @@ namespace SuroboyoMaju.Shared.Class
             this.kategori_selected = kategori_selected;
             this.combo_box_selected_index = combo_box_selected_index;
             this.image_laporan = image_laporan;
+            this.tanggal_laporan = tanggal_laporan;
+            this.waktu_laporan = waktu_laporan;
         }
     }
 }

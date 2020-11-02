@@ -43,6 +43,10 @@ namespace SuroboyoMaju.Shared.Pages
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dtTanggalLaporan.MaxYear = new DateTime(2020, 12, 31);
+            dtTanggalLaporan.MinYear = new DateTime(2020, 1, 31);
+            dtTanggalLaporan.Date = DateTime.Now;
+            tpWaktuLaporan.Time = DateTime.Now.TimeOfDay;
         }
 
         private void DispatcherTimer_Tick(object sender, object e)
@@ -155,36 +159,43 @@ namespace SuroboyoMaju.Shared.Pages
             }
             else
             {
-                if (imageLaporan != null)
+                if (imageLaporan==null && cbJenisBarang.SelectedIndex!=7)
                 {
-                    string responseData = await httpObject.GetRequest("settings/checkKecamatanAvailable?lat=" + lat + "&lng=" + lng);
-                    JObject json = JObject.Parse(responseData);
-                    if (json["status"].ToString() == "1")
-                    {
-                        int jenisLaporan = (bool)rbLostItem.IsChecked ? 1 : 0;
-                        string judulLaporan = txtJudulLaporan.Text;
-                        string descLaporan = txtDescBarang.Text;
-                        string alamatLaporan = txtAutocompleteAddress.Text;
-                        SettingKategori kategoriSelected = listSettingKategoriLostFound[cbJenisBarang.SelectedIndex];
-                        int index = cbJenisBarang.SelectedIndex;
-                        int id_kecamatan = Convert.ToInt32(json["id_kecamatan"].ToString());
-                        string namaFileGambar = listSettingKategoriLostFound[cbJenisBarang.SelectedIndex].file_gambar_kategori;
-                        ConfirmReportParams param = new ConfirmReportParams("lostfound", judulLaporan, jenisLaporan.ToString(), descLaporan, lat, lng, alamatLaporan, id_kecamatan, kategoriSelected, index, imageLaporan);
-                        session.setConfirmreportParam(param);
-                        this.Frame.Navigate(typeof(ConfirmReportPage));
-                    }
-                    else
-                    {
-                        var message = new MessageDialog(json["message"].ToString());
-                        await message.ShowAsync();
-                    }
+                    await new MessageDialog("Wajib menyertakan gambar untuk membuat kategori barang yang dilaporkan").ShowAsync();
                 }
                 else
                 {
-                    var message = new MessageDialog("Wajib menyertakan gambar untuk membuat laporan Lost & Found");
-                    await message.ShowAsync();
+                    if (rbFoundItem.IsChecked == true && imageLaporan==null)
+                    {
+                        await new MessageDialog("Wajib menyertakan gambar untuk membuat penemuan dokumen pribadi yang dilaporkan").ShowAsync();
+                    }
+                    else
+                    {
+                        string responseData = await httpObject.GetRequest("settings/checkKecamatanAvailable?lat=" + lat + "&lng=" + lng);
+                        JObject json = JObject.Parse(responseData);
+                        if (json["status"].ToString() == "1")
+                        {
+                            int jenisLaporan = (bool)rbLostItem.IsChecked ? 1 : 0;
+                            string judulLaporan = txtJudulLaporan.Text;
+                            string descLaporan = txtDescBarang.Text;
+                            string alamatLaporan = txtAutocompleteAddress.Text;
+                            SettingKategori kategoriSelected = listSettingKategoriLostFound[cbJenisBarang.SelectedIndex];
+                            int index = cbJenisBarang.SelectedIndex;
+                            int id_kecamatan = Convert.ToInt32(json["id_kecamatan"].ToString());
+                            string namaFileGambar = listSettingKategoriLostFound[cbJenisBarang.SelectedIndex].file_gambar_kategori;
+                            string tanggal_laporan = dtTanggalLaporan.Date.ToString("yyyy-MM-dd");
+                            string waktu_laporan = tpWaktuLaporan.Time.ToString();
+                            ConfirmReportParams param = new ConfirmReportParams("lostfound", judulLaporan, jenisLaporan.ToString(), descLaporan, lat, lng, alamatLaporan, id_kecamatan, kategoriSelected, index, imageLaporan, tanggal_laporan, waktu_laporan);
+                            session.setConfirmreportParam(param);
+                            this.Frame.Navigate(typeof(ConfirmReportPage));
+                        }
+                        else
+                        {
+                            var message = new MessageDialog(json["message"].ToString());
+                            await message.ShowAsync();
+                        }
+                    }       
                 }
-
             }
         }
 

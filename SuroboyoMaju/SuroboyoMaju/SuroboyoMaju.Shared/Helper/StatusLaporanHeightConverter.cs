@@ -12,7 +12,7 @@ namespace SuroboyoMaju.Shared.Helper
             int status = (int)value;
             if (status == 0)
             {
-                return 110;
+                return 120;
             }
             else
             {

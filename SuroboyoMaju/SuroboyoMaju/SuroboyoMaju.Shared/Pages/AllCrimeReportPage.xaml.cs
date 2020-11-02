@@ -100,7 +100,7 @@ namespace SuroboyoMaju.Shared.Pages
                 loadLaporanKriminalitasWithFilter();
             }
             btnPrevPage.Visibility = Visibility.Visible;
-            btnNextPage.Visibility = jumlah > jumlah_laporan ? Visibility.Collapsed : Visibility.Visible;
+            btnNextPage.Visibility = jumlah >= jumlah_laporan ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void prevPage(object sender, RoutedEventArgs e)

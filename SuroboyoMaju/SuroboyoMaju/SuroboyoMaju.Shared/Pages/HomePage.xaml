@@ -44,7 +44,7 @@
                         <TextBlock Name="txtStatusUser" Text="Status akun" FontSize="14" FontWeight="SemiLight" Foreground="White"/>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="2" Orientation="Horizontal">
-                        <android:Button Name="btnEmergency" HorizontalAlignment="Right" Click="emergencyAction" Foreground="White" Background="Red" CornerRadius="10" Content="Emergency"></android:Button>
+                        <android:Button Visibility="Collapsed"  Name="btnEmergency" HorizontalAlignment="Right" Click="emergencyAction" Foreground="White" Background="Red" CornerRadius="10" Content="Emergency"></android:Button>
                     </StackPanel>
                 </Grid>
             </Border>

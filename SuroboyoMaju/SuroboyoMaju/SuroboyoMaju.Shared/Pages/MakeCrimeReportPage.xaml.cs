@@ -34,17 +34,19 @@ namespace SuroboyoMaju.Shared.Pages
         UploadedImage imageLaporan;
         ObservableCollection<SettingKategori> listSetingKategoriKriminalitas;
         ObservableCollection<AutocompleteAddress> listAutoCompleteAddress;
-        User userLogin;
         public MakeCrimeReportPage()
         {
             this.InitializeComponent();
             listAutoCompleteAddress = new ObservableCollection<AutocompleteAddress>();
             session = new Session();
-            userLogin = session.getUserLogin();
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
             httpObject = new HttpObject();
+            dtTanggalLaporan.MaxYear = new DateTime(2020, 12, 31);
+            dtTanggalLaporan.MinYear = new DateTime(2020, 1, 31);
+            dtTanggalLaporan.Date = DateTime.Now;
+            tpWaktuLaporan.Time = DateTime.Now.TimeOfDay;
         }
 
         private void DispatcherTimer_Tick(object sender, object e)
@@ -186,7 +188,9 @@ namespace SuroboyoMaju.Shared.Pages
                     int index = cbJenisKejadian.SelectedIndex;
                     SettingKategori kategoriSelected = listSetingKategoriKriminalitas[cbJenisKejadian.SelectedIndex];
                     int id_kecamatan = Convert.ToInt32(json["id_kecamatan"].ToString());
-                    ConfirmReportParams param = new ConfirmReportParams("kriminalitas", judulLaporan, null, descKejadian, lat, lng, alamatLaporan, id_kecamatan, kategoriSelected, index, imageLaporan);
+                    string tanggal_laporan = dtTanggalLaporan.Date.ToString("yyyy-MM-dd");
+                    string waktu_laporan = tpWaktuLaporan.Time.ToString();
+                    ConfirmReportParams param = new ConfirmReportParams("kriminalitas", judulLaporan, null, descKejadian, lat, lng, alamatLaporan, id_kecamatan, kategoriSelected, index, imageLaporan,tanggal_laporan,waktu_laporan);
                     session.setConfirmreportParam(param);
                     this.Frame.Navigate(typeof(ConfirmReportPage));
                 }

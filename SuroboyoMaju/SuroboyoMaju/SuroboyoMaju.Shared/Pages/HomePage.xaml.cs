@@ -53,10 +53,6 @@ namespace SuroboyoMaju.Shared.Pages
             {
                 btnEmergency.Visibility = Visibility.Visible;
             }
-            else
-            {
-                btnEmergency.Visibility = Visibility.Collapsed;
-            }
 #elif NETFX_CORE
             lvLaporanKriminalitas.ItemsSource = listLaporanKriminalitas;
             lvLaporanLostFound.ItemsSource = listLaporanLostFound;
@@ -210,11 +206,11 @@ namespace SuroboyoMaju.Shared.Pages
             {
                 if (userLogin.status_user == 2)
                 {
-                    session.getHomePageKepalaKeamananInstance().Frame.Navigate(typeof(AllCrimeReportPage));
+                    session.getHomePageKepalaKeamananInstance().Frame.Navigate(typeof(AllLostFoundReportPage));
                 }
                 else
                 {
-                    session.getHomeNavigationPageInstance().Frame.Navigate(typeof(AllCrimeReportPage));
+                    session.getHomeNavigationPageInstance().Frame.Navigate(typeof(AllLostFoundReportPage));
                 }
             }
         }

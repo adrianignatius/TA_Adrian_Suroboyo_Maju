@@ -93,6 +93,11 @@ namespace SuroboyoMaju.Shared.Pages
             webVieMapLokasi.Navigate(new Uri(session.getUrlWebView() + "location-map.php?lat=" + param.lat_laporan + "&lng=" + param.lng_laporan + "&type=" + type));
         }
 
+        private async void coba(object sender,RoutedEventArgs e)
+        {
+            await new MessageDialog("tapped").ShowAsync();
+        }
+
         private async void konfirmasiLaporan(object sender, RoutedEventArgs e)
         {
             ContentDialog confirmDialog = new ContentDialog

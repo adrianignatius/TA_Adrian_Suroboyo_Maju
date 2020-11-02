@@ -61,7 +61,7 @@ namespace SuroboyoMaju.Shared.Pages
                     new KeyValuePair<string, string>("card_exp_month", cbExpiredMonth.SelectedItem.ToString()),
                     new KeyValuePair<string, string>("card_exp_year", "20"+cbExpiredYear.SelectedItem.ToString())
                 });
-                string responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/registerCard", content, session.getTokenAuthorization());
+                string responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/registerCard/"+userLogin.id_user, content, session.getTokenAuthorization());
                 JObject json = JObject.Parse(responseData);
                 if (json["status"].ToString() == "1")
                 {

@@ -36,7 +36,7 @@
                             <TextBlock Name="txtTanggalUpload" Margin="0,10,0,0" FontSize="16" FontWeight="SemiBold" Text="Tanggal Upload"></TextBlock>
                         </StackPanel>
                     </Grid>
-                    <Grid Margin="0,10,0,0" HorizontalAlignment="Stretch" MaxHeight="360">
+                    <Grid Margin="0,10,0,0" HorizontalAlignment="Stretch" MaxHeight="400">
                         <Image Name="imageLaporan" Stretch="UniformToFill"></Image>
                     </Grid>
                     <!--<StackPanel>

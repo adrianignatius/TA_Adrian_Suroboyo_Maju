@@ -55,8 +55,8 @@ namespace SuroboyoMaju
             Dictionary<string, object> additionalData = payload.additionalData;
             if (additionalData != null)
             {
-                HomeNavigationPage homePage = session.getHomeNavigationPageInstance();
-                //Frame rootFrame = Windows.UI.Xaml.Window.Current.Content as Frame;
+                //HomeNavigationPage homePage = session.getHomeNavigationPageInstance();
+                Frame rootFrame = Windows.UI.Xaml.Window.Current.Content as Frame;
                 string page = additionalData["page"].ToString();
                 if (page == "1")
                 {
@@ -85,7 +85,7 @@ namespace SuroboyoMaju
                     }
                     ReportDetailPageParams param = new ReportDetailPageParams(id_user_pelapor, nama_user_pelapor, id_laporan, alamat_laporan, tanggal_laporan, waktu_laporan, judul_laporan, jenis_laporan, deskripsi_laporan, lat_laporan, lng_laporan, tag, thumbnail_gambar, status_laporan, jumlah_konfirmasi);
                     session.setReportDetailPageParams(param);
-                    homePage.Frame.Navigate(typeof(ReportDetailPage));
+                    rootFrame.Navigate(typeof(ReportDetailPage));
                 }else if (page == "2")
                 {
                     int id_chat = Convert.ToInt32(additionalData["id_chat"].ToString());
@@ -94,7 +94,7 @@ namespace SuroboyoMaju
                     string nama_display = additionalData["nama_display"].ToString();
                     ChatPageParams param = new ChatPageParams(id_chat, id_user_penerima, id_user_pengirim, nama_display);
                     session.setChatPageParams(param);
-                    homePage.Frame.Navigate(typeof(PersonalChatPage));
+                    rootFrame.Navigate(typeof(PersonalChatPage));
                 }
             }
         }
