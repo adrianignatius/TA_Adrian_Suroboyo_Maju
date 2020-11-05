@@ -42,61 +42,44 @@ namespace SuroboyoMaju.Shared.Pages
             userLogin = session.getUserLogin();
         }
 
+        private void validateInput(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
+        }
+
         private async void confirmUpgrade(object sender, RoutedEventArgs e)
         {
-            if (cbExpiredYear.SelectedIndex == -1 || cbExpiredMonth.SelectedIndex == 1)
+            if (cbExpiredYear.SelectedIndex == -1 || cbExpiredMonth.SelectedIndex == 1||txtCardNumber.Text.Length==0||txtCvvNumber.Text.Length==0)
             {
                 var message = new MessageDialog("Pastikan Semua Data Kartu Terisi");
                 await message.ShowAsync();
             }
             else
             {
-                using (var client = new HttpClient())
+                var content = new FormUrlEncodedContent(new[]{
+                    new KeyValuePair<string, string>("card_number", txtCardNumber.Text),
+                    new KeyValuePair<string, string>("card_exp_month", cbExpiredMonth.SelectedItem.ToString()),
+                    new KeyValuePair<string, string>("card_exp_year", "20"+cbExpiredYear.SelectedItem.ToString())
+                });
+                string responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/registerCard", content, session.getTokenAuthorization());
+                JObject json = JObject.Parse(responseData);
+                if (json["status"].ToString() == "1")
                 {
-                    string cardNumber, cardExpMonth, cardExpYear, clientKey;
-                    clientKey = "SB-Mid-client-J4xpVwGv_HmNID-g";
-                    cardNumber = "4811 1111 1111 1114";
-                    cardExpMonth = cbExpiredMonth.SelectedItem.ToString();
-                    cardExpYear = "20" + cbExpiredYear.SelectedItem.ToString();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
-                    client.DefaultRequestHeaders.Add("Accept", "application/json");
-                    client.DefaultRequestHeaders.Add("Authorization", "Basic U0ItTWlkLXNlcnZlci1GQjRNSERieVhlcFc5OFNRWjY0SHhNeEU=");
-                    string reqUri = "https://api.sandbox.midtrans.com/v2/card/register?card_number=" + cardNumber + "&card_exp_month=" + cardExpMonth + "&card_exp_year=" + cardExpYear + "&client_key=" + clientKey;
-                    HttpResponseMessage response = await client.GetAsync(reqUri);
-                    if (response.IsSuccessStatusCode)
+                    responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/chargeUser/"+userLogin.id_user, null, session.getTokenAuthorization());
+                    json = JObject.Parse(responseData);
+                    if (json["status"].ToString() == "1")
                     {
-                        string idUser = userLogin.id_user.ToString();
-                        var hasil = response.Content.ReadAsStringAsync().Result;
-                        JObject json = JObject.Parse(hasil);
-                        string tokenId = json["saved_token_id"].ToString();
-                        var content = new FormUrlEncodedContent(new[]{
-                            new KeyValuePair<string, string>("id_user", idUser),
-                            new KeyValuePair<string, string>("credit_card_token", tokenId),
-                        });
-                        string responseData = await httpObject.PutRequest("user/updateCreditCardToken", content, session.getTokenAuthorization());
-                        json = JObject.Parse(responseData);
-                        if (json["status"].ToString() == "1")
-                        {
-                            var content2 = new FormUrlEncodedContent(new[]{
-                                new KeyValuePair<string, string>("id_user", idUser)
-                            });
-                            responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/chargeUser", content2, session.getTokenAuthorization());
-                            json = JObject.Parse(responseData);
-                            var message = new MessageDialog(json["message"].ToString());
-                            await message.ShowAsync();
-                            if (json["status"].ToString() == "1")
-                            {
-                                userLogin.status_user = 1;
-                                userLogin.premium_available_until = json["premium_available_until"].ToString();
-                                this.Frame.GoBack();
-                            }
-                        }
+                        await new MessageDialog("Berhasil Melakukan Pembayaran, Akun anda sekarang terdaftar sebagai akun premium").ShowAsync();
+                        userLogin.status_user = 1;
+                        userLogin.premium_available_until = json["premium_available_until"].ToString();
+                        this.Frame.GoBack();
+                    }else{
+                        await new MessageDialog(json["message"].ToString()).ShowAsync();
                     }
-                    else
-                    {
-                        var message = new MessageDialog(response.StatusCode.ToString());
-                        await message.ShowAsync();
-                    }
+                }
+                else
+                {
+                    await new MessageDialog(json["message"].ToString()).ShowAsync();
                 }
             }
         }

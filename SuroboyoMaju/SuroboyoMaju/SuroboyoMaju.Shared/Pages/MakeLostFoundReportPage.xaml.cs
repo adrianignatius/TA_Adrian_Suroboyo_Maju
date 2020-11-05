@@ -25,7 +25,6 @@ namespace SuroboyoMaju.Shared.Pages
 {
     public sealed partial class MakeLostFoundReportPage : Page
     {
-        User userLogin;
         DispatcherTimer dispatcherTimer;
         int tick = 0;
         bool isChosen = false;
@@ -147,11 +146,6 @@ namespace SuroboyoMaju.Shared.Pages
             webViewMap.Navigate(new Uri(session.getUrlWebView() + "location-map.php?lat=" + lat + "&lng=" + lng + "&type=" + type));
         }
 
-        private void LostFoundPageLoaded(object sender, RoutedEventArgs e)
-        {
-            userLogin = session.getUserLogin();
-        }
-
         private async void goToDetail(object sender, RoutedEventArgs e)
         {
             if (validateInput() == false)
@@ -172,12 +166,10 @@ namespace SuroboyoMaju.Shared.Pages
                         string descLaporan = txtDescBarang.Text;
                         string alamatLaporan = txtAutocompleteAddress.Text;
                         SettingKategori kategoriSelected = listSettingKategoriLostFound[cbJenisBarang.SelectedIndex];
-                        string tglLaporan = DateTime.Now.ToString("dd/MM/yyyy");
-                        string waktuLaporan = DateTime.Now.ToString("HH:mm:ss");
                         int index = cbJenisBarang.SelectedIndex;
                         int id_kecamatan = Convert.ToInt32(json["id_kecamatan"].ToString());
                         string namaFileGambar = listSettingKategoriLostFound[cbJenisBarang.SelectedIndex].file_gambar_kategori;
-                        ConfirmReportParams param = new ConfirmReportParams("lostfound", judulLaporan, jenisLaporan.ToString(), descLaporan, lat, lng, alamatLaporan, id_kecamatan, tglLaporan, waktuLaporan, kategoriSelected, index, imageLaporan);
+                        ConfirmReportParams param = new ConfirmReportParams("lostfound", judulLaporan, jenisLaporan.ToString(), descLaporan, lat, lng, alamatLaporan, id_kecamatan, kategoriSelected, index, imageLaporan);
                         session.setConfirmreportParam(param);
                         this.Frame.Navigate(typeof(ConfirmReportPage));
                     }

@@ -28,7 +28,7 @@
                     <RadioButton FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="rbFoundItem" FontSize="17" Margin="0,0,20,0 " IsChecked="True">Penemuan Barang</RadioButton>
                     <RadioButton FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="rbLostItem" FontSize="17">Kehilangan Barang</RadioButton>
                 </StackPanel>
-                <TextBlock Margin="0,30,0,0" FontSize="20" Text="Jenis Barang Yang Ditemukan"></TextBlock>
+                <TextBlock Margin="0,30,0,0" FontSize="20" Text="Jenis Barang"></TextBlock>
                 <ComboBox FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="cbJenisBarang" HorizontalAlignment="Stretch" Margin="0,10,0,0" FontSize="16">
 
                 </ComboBox>

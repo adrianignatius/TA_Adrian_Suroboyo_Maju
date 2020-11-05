@@ -74,7 +74,6 @@ namespace SuroboyoMaju.Shared.Pages
             {
                 string responseData = await new HttpObject().PutRequest("user/updateLocation/" + session.getUserLogin().id_user+queryParams,null,session.getTokenAuthorization());
                 JObject json = JObject.Parse(responseData);
-                await new MessageDialog(json["status"].ToString()).ShowAsync();
             }
 #endif
             session.setHomeNavigationPageInstance(this);

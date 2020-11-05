@@ -11,7 +11,7 @@
     FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="20">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>

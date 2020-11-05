@@ -110,19 +110,29 @@ namespace SuroboyoMaju.Shared.Pages
                 stackEmpty.Visibility = Visibility.Visible;
                 lvHistory.Visibility = Visibility.Collapsed;
             }
-            lvHistory.ItemsSource = listHistoryLaporanLostFound;
+            else
+            {
+                stackEmpty.Visibility = Visibility.Collapsed;
+                lvHistory.Visibility = Visibility.Visible;
+                lvHistory.ItemsSource = listHistoryLaporanLostFound;
+            }
         }
 
         private async void loadLaporanKriminalitas()
         {
             string responseData = await httpObject.GetRequestWithAuthorization("user/getHistoryLaporanKriminalitas/" + userLogin.id_user, session.getTokenAuthorization());
             listHistoryLaporanKriminalitas = JsonConvert.DeserializeObject<ObservableCollection<LaporanKriminalitas>>(responseData);
-            if (listHistoryLaporanLostFound.Count == 0)
+            if (listHistoryLaporanKriminalitas.Count == 0)
             {
                 stackEmpty.Visibility = Visibility.Visible;
                 lvHistory.Visibility = Visibility.Collapsed;
             }
-            lvHistory.ItemsSource = listHistoryLaporanKriminalitas;
+            else
+            {
+                stackEmpty.Visibility = Visibility.Collapsed;
+                lvHistory.Visibility = Visibility.Visible;
+                lvHistory.ItemsSource = listHistoryLaporanKriminalitas;
+            }
         }
 
         private void changeSource(object sender, RoutedEventArgs e)

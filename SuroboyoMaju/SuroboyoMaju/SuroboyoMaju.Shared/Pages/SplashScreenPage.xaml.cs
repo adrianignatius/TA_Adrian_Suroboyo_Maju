@@ -50,7 +50,6 @@ namespace SuroboyoMaju.Shared.Pages
 
         private async void pageLoaded(object Sender, RoutedEventArgs e)
         {
-
             try
             {
                 var secureStorage = await SecureStorage.GetAsync("jwt_token");

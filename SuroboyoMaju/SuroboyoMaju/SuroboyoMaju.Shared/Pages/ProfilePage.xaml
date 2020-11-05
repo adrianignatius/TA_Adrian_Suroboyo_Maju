@@ -18,7 +18,7 @@
             <Setter Property="FontFamily" Value="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"></Setter>
         </Style>
     </Page.Resources>
-    <Grid Margin="20">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -37,7 +37,7 @@
                 
             </Grid>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Vertical">
+        <StackPanel Margin="20" Grid.Row="1" Orientation="Vertical">
             <TextBlock Style="{StaticResource textBlockStyle}" Margin="0,15,0,0" FontSize="16" Text="Nomor Telepon" FontWeight="Medium"></TextBlock>
             <TextBlock Name="txtNotelpUser" Style="{StaticResource textBlockStyle}" Margin="0,10,0,0" FontSize="14" Text="NoTelp"></TextBlock>
             <TextBlock Style="{StaticResource textBlockStyle}" Margin="0,15,0,0" FontSize="16" Text="Nama Lengkap" FontWeight="Medium"></TextBlock>

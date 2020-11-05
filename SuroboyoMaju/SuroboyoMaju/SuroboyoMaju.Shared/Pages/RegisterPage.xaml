@@ -57,7 +57,7 @@
                     <TextBlock Style="{StaticResource textBlockStyle}" x:Name="textBlockFullName"  FontSize="20" Margin="30,0,0,0">Nama Lengkap *</TextBlock>
                     <TextBox Style="{StaticResource textBoxStyle}" Name="txtFullName" BeforeTextChanging="txtFullNameBeforeTextChanging" Padding="8" Foreground="Black" Margin="30,10,30,0" FontSize="20" Height="50"></TextBox>
                     <TextBlock Style="{StaticResource textBlockStyle}" Name="textBlockPhone" FontSize="20" Margin="30,15,0,0">Nomor Handphone *</TextBlock>
-                    <TextBox Style="{StaticResource textBoxStyle}" Name="txtPhone" BeforeTextChanging="txtPhoneBeforeTextChanging" Padding="8" Foreground="Black" Margin="30,15,30,0" FontSize="20" Height="50" ></TextBox>
+                    <TextBox MaxLength="15" Style="{StaticResource textBoxStyle}" Name="txtPhone" BeforeTextChanging="txtPhoneBeforeTextChanging" Padding="8" Foreground="Black" Margin="30,15,30,0" FontSize="20" Height="50" ></TextBox>
                     <TextBlock Style="{StaticResource textBlockStyle}" Name="textBlockPassword" FontSize="20" Margin="30,15,0,0">Password *</TextBlock>
                     <PasswordBox Name="txtPassword" Padding="8" Foreground="Black" Margin="30,15,30,0" FontSize="20" Height="50" ></PasswordBox>
                     <TextBlock Style="{StaticResource textBlockStyle}" FontSize="20" Margin="30,15,0,0">Confirm Password *</TextBlock>

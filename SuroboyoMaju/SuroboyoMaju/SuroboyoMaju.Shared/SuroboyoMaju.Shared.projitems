@@ -263,6 +263,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\icon\signout.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\icon\suspicious-activity-icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\icon\vandalism-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\icon\vehicle-icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\icon\violence-icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\icon\wallet-icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\icon\watch-icon.png" />

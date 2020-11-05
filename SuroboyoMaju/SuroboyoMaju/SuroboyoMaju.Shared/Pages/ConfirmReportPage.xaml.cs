@@ -22,6 +22,7 @@ namespace SuroboyoMaju.Shared.Pages
         User userLogin;
         HttpObject httpObject;
         string url = "ms-appx:///Assets/icon/";
+        string tanggal, waktu;
         public ConfirmReportPage()
         {
             this.InitializeComponent();
@@ -36,9 +37,8 @@ namespace SuroboyoMaju.Shared.Pages
             param = session.getConfirmReportParams();
             imageIcon.Source = new BitmapImage(new Uri(url + param.kategori_selected.file_gambar_kategori));
             txtJenisLaporan.Text = param.kategori_selected.nama_kategori;
-            DateTime dateTime = DateTime.Parse(param.tanggal_laporan);
-            string tanggal = dateTime.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID"));
-            string waktu = DateTime.Now.ToString("H:m:ss");
+            tanggal = DateTime.Now.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID"));
+            waktu = DateTime.Now.ToString("HH:mm:ss");
             txtTanggalLaporan.Text = tanggal+" Pukul "+waktu;
             txtJudulLaporan.Text = param.judul_laporan;
             txtDeskripsiLaporan.Text = param.deskripsi_laporan;
@@ -91,8 +91,8 @@ namespace SuroboyoMaju.Shared.Pages
         {
             MultipartFormDataContent form = new MultipartFormDataContent();
             form.Add(new StringContent(param.judul_laporan), "judul_laporan");
-            form.Add(new StringContent(param.tanggal_laporan), "tanggal_laporan");
-            form.Add(new StringContent(param.waktu_laporan), "waktu_laporan");
+            form.Add(new StringContent(DateTime.Now.ToString("yyyy-MM-dd")), "tanggal_laporan");
+            form.Add(new StringContent(DateTime.Now.ToString("HH:mm:ss")), "waktu_laporan");
             form.Add(new StringContent(param.alamat_laporan), "alamat_laporan");
             form.Add(new StringContent(param.lat_laporan), "lat_laporan");
             form.Add(new StringContent(param.lng_laporan), "lng_laporan");

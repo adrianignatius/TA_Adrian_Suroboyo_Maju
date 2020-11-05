@@ -56,11 +56,11 @@
                     <TextBlock Style="{StaticResource textBlockStyle}" Name="textBlockRegister" Foreground="Black" FontSize="36" Margin="30,30,0,0" FontWeight="ExtraBold">Login</TextBlock>
                     <TextBlock Style="{StaticResource textBlockStyle}" TextWrapping="Wrap" Margin="30,10,0,20" Foreground="Black" FontSize="15" >Don't have an account? <Hyperlink Click="goToRegister">Create your account here</Hyperlink></TextBlock>
                     <TextBlock Style="{StaticResource textBlockStyle}" Name="textBlockPhone" FontSize="20" Margin="30,15,0,0">Nomor Handphone *</TextBlock>
-                    <TextBox Style="{StaticResource textBoxStyle}" Name="txtNoHandphone" BeforeTextChanging="validateInput" Padding="8" Foreground="Black" Margin="30,15,30,0" FontSize="20" Height="50" ></TextBox>
+                    <TextBox MaxLength="15" Style="{StaticResource textBoxStyle}" Name="txtNoHandphone" BeforeTextChanging="validateInput" Padding="8" Foreground="Black" Margin="30,15,30,0" FontSize="20" Height="50" ></TextBox>
                     <TextBlock Style="{StaticResource textBlockStyle}" Name="textBlockPassword" FontSize="20" Margin="30,15,0,0">Password *</TextBlock>
                     <PasswordBox Name="txtPassword" Padding="8" Foreground="Black" Margin="30,15,30,0" FontSize="20" Height="50" ></PasswordBox>
                     <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Click="login" Foreground="AntiqueWhite" x:Name="btnLogin" Background="DarkGreen" FontWeight="SemiBold" Padding="15" Content="Login" HorizontalAlignment="Stretch" Margin="30,35,30,0" FontSize="30" />
-                    <ProgressRing Margin="0,8,0,0" Name="progressRing" HorizontalAlignment="Center" IsActive="True" Visibility="Collapsed" Width="100" Height="100"></ProgressRing>
+                    <ProgressRing Margin="0,16,0,0" Name="progressRing" HorizontalAlignment="Center" IsActive="True" Visibility="Collapsed" Width="80" Height="80"></ProgressRing>
                 </StackPanel>
             </ScrollViewer>
 
