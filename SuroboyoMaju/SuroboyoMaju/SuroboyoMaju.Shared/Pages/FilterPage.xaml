@@ -61,6 +61,8 @@
                             <CheckBox Name="cbBarang5" Checked="jenisBarangChecked" Unchecked="jenisBarangUnchecked" Tag="5" Grid.Row="1" Grid.Column="1" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontSize="14" >Sepatu</CheckBox>
                             <CheckBox Name="cbBarang6" Checked="jenisBarangChecked" Unchecked="jenisBarangUnchecked" Tag="6" Grid.Row="1" Grid.Column="2" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontSize="14" >Hewan Peliharaan</CheckBox>
                             <CheckBox Name="cbBarang7" Checked="jenisBarangChecked" Unchecked="jenisBarangUnchecked" Tag="7" Grid.Row="2" Grid.Column="0" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontSize="14" >Dompet</CheckBox>
+                            <CheckBox Name="cbBarang8" Checked="jenisBarangChecked" Unchecked="jenisBarangUnchecked" Tag="8" Grid.Row="2" Grid.Column="1" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontSize="14" >Dokumen Pribadi</CheckBox>
+                            <CheckBox Name="cbBarang9" Checked="jenisBarangChecked" Unchecked="jenisBarangUnchecked" Tag="9" Grid.Row="2" Grid.Column="2" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontSize="14" >Kendaraan</CheckBox>
                         </Grid>
                     </StackPanel>
                     <StackPanel Visibility="Collapsed" Name="stackKejadian">

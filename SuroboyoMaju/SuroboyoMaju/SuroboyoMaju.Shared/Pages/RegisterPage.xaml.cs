@@ -50,7 +50,7 @@ namespace SuroboyoMaju.Shared.Pages
 
         private void goToLogin(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(LoginPage));
+            this.Frame.Navigate(typeof(VerifyOtpPage));
 
         }
 

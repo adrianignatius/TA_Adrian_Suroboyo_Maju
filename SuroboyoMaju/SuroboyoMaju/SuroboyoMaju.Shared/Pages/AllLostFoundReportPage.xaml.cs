@@ -165,7 +165,6 @@ namespace SuroboyoMaju.Shared.Pages
                 JObject json = JObject.Parse(responseData);
                 jumlah_laporan = Convert.ToInt32(json["count"].ToString());
                 session.setJumlahLaporanState(jumlah_laporan);
-                await new MessageDialog(jumlah_laporan.ToString()).ShowAsync();
                 btnRefresh.Visibility = Visibility.Visible;
                 loadLaporanLostFoundWithFilter();
                 btnNextPage.Visibility = jumlah_laporan < 6 ? Visibility.Collapsed : Visibility.Visible;
