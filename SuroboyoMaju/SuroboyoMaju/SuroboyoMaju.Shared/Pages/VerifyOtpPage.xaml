@@ -6,10 +6,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Loaded="pageLoaded"
     RequestedTheme="Light"
+    FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Button Click="Back_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
+        <Grid Margin="20">
+            <TextBlock FontSize="30" FontWeight="ExtraBold" TextWrapping="WrapWholeWords" HorizontalAlignment="Center" Text="Verifikasi Kode OTP"></TextBlock>
+            <StackPanel Margin="0,56,0,0">
+                <Image Margin="0,40,0,0" Source="/Assets/icon/otp-icon.png" Width="200" Height="200"></Image>
+                <TextBlock FontSize="14" TextAlignment="Center" MaxWidth="300" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Text="Kami telah mengirimkan kode OTP ke nomor hp anda, silahkan masukkan kode yang telah dikirim"></TextBlock>
+                <TextBox FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="txtOtp" BeforeTextChanging="txtOtpBeforeChangingEvent" TextAlignment="Center" MaxLength="4" Margin="0,20,0,0" Width="200" HorizontalAlignment="Center"></TextBox>
+                <TextBlock Tapped="sendOTP" Foreground="Gray" Margin="0,16,0,0" TextAlignment="Center" FontSize="14" Text="Kirim ulang kode OTP"></TextBlock>
+                <TextBlock Name="txtTimer" Foreground="Gray" Margin="0,0,0,0" TextAlignment="Center" FontSize="14" Text="00:00"></TextBlock>
+                <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontSize="20" Click="confirmOTP" Margin="0,20,0,0" Foreground="White" Background="Green" HorizontalAlignment="Stretch" Content="Konfirmasi"></Button>
+            </StackPanel>
+        </Grid>
 
     </Grid>
 </Page>

@@ -33,6 +33,8 @@ namespace SuroboyoMaju.Shared.Pages
             session = new Session();
             httpObject = new HttpObject();
             listKomentar = new ObservableCollection<KomentarLaporan>();
+            param = session.getReportDetailPageParams();
+            userLogin = session.getUserLogin();
         }
 
         private async void checkKonfirmasiLaporan()
@@ -51,8 +53,6 @@ namespace SuroboyoMaju.Shared.Pages
 
         private void pageLoaded(object sender, RoutedEventArgs e)
         {
-            param = session.getReportDetailPageParams();
-            userLogin = session.getUserLogin();
             string type = "";
             if (param.tag == "kriminalitas")
             {
@@ -91,11 +91,6 @@ namespace SuroboyoMaju.Shared.Pages
             txtJenisLaporan.Text = param.jenis_laporan;
             loadKomentarLaporan();
             webVieMapLokasi.Navigate(new Uri(session.getUrlWebView() + "location-map.php?lat=" + param.lat_laporan + "&lng=" + param.lng_laporan + "&type=" + type));
-        }
-
-        private async void coba(object sender,RoutedEventArgs e)
-        {
-            await new MessageDialog("tapped").ShowAsync();
         }
 
         private async void konfirmasiLaporan(object sender, RoutedEventArgs e)

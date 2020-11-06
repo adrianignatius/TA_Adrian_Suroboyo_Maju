@@ -50,7 +50,7 @@ namespace SuroboyoMaju.Shared.Pages
 
         private void goToLogin(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(VerifyOtpPage));
+            this.Frame.Navigate(typeof(LoginPage));
 
         }
 
@@ -148,15 +148,14 @@ namespace SuroboyoMaju.Shared.Pages
                         }
                         responseData = await httpObject.PostRequestWithUrlEncoded("registerUser", new FormUrlEncodedContent(formContent));
                         json = JObject.Parse(responseData);
-                        var message = new MessageDialog(json["message"].ToString());
-                        await message.ShowAsync();
+                        await new MessageDialog(json["message"].ToString()).ShowAsync();
                         if (json["status"].ToString() == "1")
                         {
                             string data = json["data"].ToString();
                             User userRegister = JsonConvert.DeserializeObject<User>(data);
                             session.setUserLogin(userRegister);
                             session.setTokenAuthorization(json["token"].ToString());
-                            this.Frame.Navigate(typeof(LoginPage));
+                            this.Frame.Navigate(typeof(VerifyOtpPage));
                         }
                     }
                     else

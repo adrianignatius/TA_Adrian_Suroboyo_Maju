@@ -39,6 +39,7 @@ namespace SuroboyoMaju.Shared.Pages
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
+            userLogin = session.getUserLogin();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -102,7 +103,6 @@ namespace SuroboyoMaju.Shared.Pages
 
         private void pageLoaded(object sender, RoutedEventArgs e)
         {
-            userLogin = session.getUserLogin();
             txtNotelpUser.Text = userLogin.telpon_user;
             txtNamaUser.Text = userLogin.nama_user;
             if (userLogin.lokasi_aktif_user == null)
@@ -122,17 +122,8 @@ namespace SuroboyoMaju.Shared.Pages
                 txtLabelLokasi.Text = lokasiUser;
                 btnDisableLokasi.Visibility = Visibility.Visible;
             }
-            if (userLogin.status_user == 1)
-            {
-                DateTime dt = DateTime.Parse(userLogin.premium_available_until);
-                txtStatusAccount.Text = "Premium Account - Berlaku hingga " + dt.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID"));
-                btnSubscribe.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                txtStatusAccount.Text = "Free Account";
-                btnSubscribe.Visibility = Visibility.Visible;
-            }
+            txtStatusAccount.Text = userLogin.status_user == 1 ? "Premium Account - Berlaku hingga " + DateTime.Parse(userLogin.premium_available_until).ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID")) : "Free Account";
+            btnSubscribe.Visibility = userLogin.status_user == 1 ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void showEditPanel(object sender, RoutedEventArgs e)
