@@ -65,7 +65,10 @@ namespace SuroboyoMaju.Shared.Pages
                 JObject json = JObject.Parse(responseData);
                 if (json["status"].ToString() == "1")
                 {
-                    responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/chargeUser/"+userLogin.id_user, null, session.getTokenAuthorization());
+                    content = new FormUrlEncodedContent(new[]{
+                        new KeyValuePair<string, string>("tanggal_charge", DateTime.Now.ToString("yyyy-MM-dd"))
+                    });
+                    responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/chargeUser/"+userLogin.id_user, content, session.getTokenAuthorization());
                     json = JObject.Parse(responseData);
                     if (json["status"].ToString() == "1")
                     {
