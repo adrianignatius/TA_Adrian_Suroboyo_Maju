@@ -38,7 +38,7 @@ namespace SuroboyoMaju
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 #if __ANDROID__
-            OneSignal.Current.StartInit("6fd226ba-1d41-4c7b-9f8b-a973a8fd436b").HandleNotificationOpened(HandleNotificationOpened)
+            OneSignal.Current.StartInit("bba49751-5018-421d-82f5-fe83cc866ce6").HandleNotificationOpened(HandleNotificationOpened)
               .Settings(new Dictionary<string, bool>() {
                 { IOSSettings.kOSSettingsKeyAutoPrompt, false },
                 { IOSSettings.kOSSettingsKeyInAppLaunchURL, false } })
@@ -100,11 +100,6 @@ namespace SuroboyoMaju
         }
 #endif
 
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
-        /// </summary>
-        /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
