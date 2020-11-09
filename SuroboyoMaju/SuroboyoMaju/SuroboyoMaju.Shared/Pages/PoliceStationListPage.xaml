@@ -31,12 +31,12 @@
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="uwpTemplate">
-            <Grid Margin="0,4,0,4">
+            <Grid Background="LightGray" Margin="0,4,0,4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
+                <StackPanel Padding="8" Grid.Column="0">
                     <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Opacity="1" Foreground="Black" FontSize="20" Text="{Binding nama_kantor_polisi }"/>
                     <TextBlock FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Margin="0,4,0,0" Opacity="1" Foreground="Black" FontSize="18" Text="{Binding alamat_kantor_polisi}" ></TextBlock>
                     <StackPanel Margin="0,4,0,0" Orientation="Horizontal">
@@ -56,7 +56,7 @@
         </DataTemplate>
     </Page.Resources>
     
-    <Grid Margin="5">
+    <Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>

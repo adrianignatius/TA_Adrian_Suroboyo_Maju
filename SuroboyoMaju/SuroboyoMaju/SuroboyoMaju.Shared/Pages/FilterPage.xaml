@@ -105,7 +105,7 @@
                         </GridView.ItemsPanel>
                     </GridView>
                     <TextBlock TextWrapping="Wrap" Name="txtStackKecamatan" Margin="0,4,0,0" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" FontSize="14" ></TextBlock>
-                    <Button Click="setFilter" Margin="0,10,0,0" Content="Terapkan" HorizontalAlignment="Stretch" CornerRadius="10" Foreground="White" Background="Green" FontSize="16"></Button>
+                    <Button Click="setFilter" Margin="0,10,0,0" Content="Terapkan" HorizontalAlignment="Stretch" Foreground="White" Background="Green" FontSize="16"></Button>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

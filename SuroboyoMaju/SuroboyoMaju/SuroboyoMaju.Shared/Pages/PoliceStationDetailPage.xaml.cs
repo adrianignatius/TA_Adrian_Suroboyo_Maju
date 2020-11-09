@@ -29,8 +29,9 @@ namespace SuroboyoMaju.Shared.Pages
             txtAlamatKantorPolisi.Text = selected.alamat_kantor_polisi;
             txtNoTelpKantorPolisi.Text = selected.notelp_kantor_polisi;
             ImageBrush ib = new ImageBrush();
-            ib.ImageSource = ib.ImageSource = new BitmapImage(new Uri(session.getUrlAssets() + selected.nama_file_gambar));
+            ib.ImageSource = new BitmapImage(new Uri(session.getUrlAssets() + selected.nama_file_gambar));
             canvasImage.Background = ib;
+            imgUWP.Source= new BitmapImage(new Uri(session.getUrlAssets() + selected.nama_file_gambar));
             loadMap();
         }
 

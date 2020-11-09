@@ -40,8 +40,8 @@
                         </Ellipse.Fill>
                     </Ellipse>
                     <StackPanel Margin="12,0,0,0" Grid.Column="1" Orientation="Vertical">
-                        <TextBlock Name="txtNamaUser" Text="Welcome, nama user!" FontSize="16" FontWeight="Black"/>
-                        <TextBlock Name="txtStatusUser" Text="Status akun" FontSize="14" FontWeight="SemiLight" Foreground="White"/>
+                        <TextBlock TextWrapping="Wrap" Name="txtNamaUser" Text="Welcome, nama user!" FontSize="16" FontWeight="Black"/>
+                        <TextBlock TextWrapping="Wrap" Name="txtStatusUser" Text="Status akun" FontSize="14" FontWeight="SemiLight" Foreground="White"/>
                     </StackPanel>
                     <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="2" Orientation="Horizontal">
                         <android:Button Visibility="Collapsed"  Name="btnEmergency" HorizontalAlignment="Right" Click="emergencyAction" Foreground="White" Background="Red" CornerRadius="10" Content="Emergency"></android:Button>

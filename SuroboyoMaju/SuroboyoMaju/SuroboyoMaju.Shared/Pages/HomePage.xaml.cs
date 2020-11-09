@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 using Xamarin.Essentials;
 
 namespace SuroboyoMaju.Shared.Pages
@@ -30,33 +31,7 @@ namespace SuroboyoMaju.Shared.Pages
         }
         public async void pageLoaded(object sender, RoutedEventArgs e)
         {
-            userLogin = session.getUserLogin();
-            txtNamaUser.Text = "Selamat Datang, " + userLogin.nama_user + "!";
-            if (userLogin.status_user == 1)
-            {
-                txtStatusUser.Text = "Premium Account";
-            }
-            else
-            {
-                txtStatusUser.Text = "Free Account";
-            }
-            string responseData = await httpObject.GetRequestWithAuthorization("laporan/getHeadlineLaporanKriminalitas", session.getTokenAuthorization());
-            listLaporanKriminalitas = JsonConvert.DeserializeObject<ObservableCollection<LaporanKriminalitas>>(responseData);
-            responseData = await httpObject.GetRequestWithAuthorization("laporan/getHeadlineLaporanLostFound", session.getTokenAuthorization());
-            listLaporanLostFound = JsonConvert.DeserializeObject<ObservableCollection<LaporanLostFound>>(responseData);
-#if __ANDROID__
-            lvHeadline.ItemsSource = listLaporanLostFound;
-            btnSelectionLaporanKriminalitas.IsEnabled = true;
-            btnSelectionLaporanLostFound.IsEnabled = false;
-            lvHeadline.Tag = "lvLostfound";
-            if (userLogin.status_user == 1)
-            {
-                btnEmergency.Visibility = Visibility.Visible;
-            }
-#elif NETFX_CORE
-            lvLaporanKriminalitas.ItemsSource = listLaporanKriminalitas;
-            lvLaporanLostFound.ItemsSource = listLaporanLostFound;
-#endif 
+            
         }
 
 #if __ANDROID__
@@ -125,7 +100,7 @@ namespace SuroboyoMaju.Shared.Pages
                         new KeyValuePair<string, string>("id_chat", json["id_chat"].ToString()),
                         new KeyValuePair<string, string>("id_user_pengirim", userLogin.id_user.ToString()),
                         new KeyValuePair<string, string>("id_user_penerima", user.id_user.ToString()),
-                        new KeyValuePair<string, string>("nama_display", user.nama_user)
+                        new KeyValuePair<string, string>("nama_display", userLogin.nama_user)
                     });
                     await httpObject.PostRequestUrlEncodedWithAuthorization("user/sendEmergencyNotification", content,session.getTokenAuthorization());
                 }
@@ -136,17 +111,51 @@ namespace SuroboyoMaju.Shared.Pages
             private async void sendEmergencyChat(User u, string address,string id_chat)
             {
                 string message = "Saya sedang dalam keadaan darurat! Lokasi terakhir saya di " + address;
-                string responseData = await httpObject.GetRequestWithAuthorization("user/checkHeaderChat?id_user_1=" + userLogin.id_user + "&id_user_2=" + u.id_user, session.getTokenAuthorization());
-                JObject json = JObject.Parse(responseData);
                 var content = new FormUrlEncodedContent(new[]{
                     new KeyValuePair<string, string>("id_chat", id_chat),
                     new KeyValuePair<string, string>("id_user_pengirim", userLogin.id_user.ToString()),
                     new KeyValuePair<string, string>("id_user_penerima", u.id_user.ToString()),
                     new KeyValuePair<string, string>("isi_chat", message),
                 });
-                responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/insertDetailChat", content, session.getTokenAuthorization());
+                string responseData = await httpObject.PostRequestUrlEncodedWithAuthorization("user/insertDetailChat", content, session.getTokenAuthorization());
         }
 #endif
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            userLogin = session.getUserLogin();
+            txtNamaUser.Text = "Selamat Datang, " + userLogin.nama_user + "!";
+            if (userLogin.status_user == 2)
+            {
+                txtStatusUser.Text = "Kepala Keamanan - Kecamatan "+userLogin.kecamatan_user;
+            }
+            else if(userLogin.status_user==1)
+            {
+                txtStatusUser.Text = "Premium Account";
+            }
+            else
+            {
+                txtStatusUser.Text = "Free Account";
+            }
+            string responseData = await httpObject.GetRequestWithAuthorization("laporan/getHeadlineLaporanKriminalitas", session.getTokenAuthorization());
+            listLaporanKriminalitas = JsonConvert.DeserializeObject<ObservableCollection<LaporanKriminalitas>>(responseData);
+            responseData = await httpObject.GetRequestWithAuthorization("laporan/getHeadlineLaporanLostFound", session.getTokenAuthorization());
+            listLaporanLostFound = JsonConvert.DeserializeObject<ObservableCollection<LaporanLostFound>>(responseData);
+#if __ANDROID__
+            lvHeadline.ItemsSource = listLaporanLostFound;
+            btnSelectionLaporanKriminalitas.IsEnabled = true;
+            btnSelectionLaporanLostFound.IsEnabled = false;
+            lvHeadline.Tag = "lvLostfound";
+            if (userLogin.status_user == 1)
+            {
+                btnEmergency.Visibility = Visibility.Visible;
+            }
+#elif NETFX_CORE
+            lvLaporanKriminalitas.ItemsSource = listLaporanKriminalitas;
+            lvLaporanLostFound.ItemsSource = listLaporanLostFound;
+#endif 
+        }
 
         private async Task<string> getUserAddress()
         {

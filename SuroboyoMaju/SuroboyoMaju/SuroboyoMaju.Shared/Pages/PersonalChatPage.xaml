@@ -8,6 +8,7 @@
     mc:Ignorable="d"
     RequestedTheme="Light"
     Loaded="pageLoaded"
+    FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>

@@ -19,6 +19,8 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="txtNamaKantorPolisi.FontSize" Value="30"></Setter>
+                        <Setter Target="txtAlamatKantorPolisi.FontSize" Value="20"></Setter>
+                        <Setter Target="txtNoTelpKantorPolisi.FontSize" Value="20"></Setter>
                         <Setter Target="canvasImage.Visibility" Value="Collapsed"></Setter>
                         <Setter Target="stackGambarUWP.Visibility" Value="Visible"></Setter>
                         <Setter Target="btnBackUWP.Visibility" Value="Visible"></Setter>
@@ -36,7 +38,7 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock FontWeight="Bold" HorizontalAlignment="Center" FontSize="24" Name="txtNamaKantorPolisi"></TextBlock>
                         <StackPanel Visibility="Collapsed" Margin="0,4,0,0" Name="stackGambarUWP">
-                            <Image Stretch="UniformToFill" Source="http://adrian-assets.ta-istts.com/KP001.jpg" MaxWidth="500" MaxHeight="400"></Image>
+                            <Image Name="imgUWP" Stretch="UniformToFill" MaxWidth="800" MaxHeight="500"></Image>
                         </StackPanel>
                         <Border CornerRadius="10" Margin="0,15,0,0" BorderBrush="LightBlue" Background="LightGray">
                             <StackPanel Padding="10" Orientation="Vertical">

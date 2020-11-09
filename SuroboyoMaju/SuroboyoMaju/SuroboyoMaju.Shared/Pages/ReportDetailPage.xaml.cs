@@ -84,7 +84,8 @@ namespace SuroboyoMaju.Shared.Pages
             }
             imageLaporan.Source = new BitmapImage(new Uri(session.getUrlGambarLaporan() + param.thumbnail_gambar));
             txtNamaPengguna.Text = param.nama_user_pelapor;
-            txtTanggalUpload.Text = param.tanggal_laporan + " Pukul " + param.waktu_laporan;
+            DateTime dateTime = DateTime.Parse(param.tanggal_laporan);
+            txtTanggalUpload.Text = dateTime.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID")) + " Pukul " + param.waktu_laporan;
             txtDeskripsiLaporan.Text = param.deskripsi_laporan;
             txtJudulLaporan.Text = param.judul_laporan;
             txtAlamatLaporan.Text = param.alamat_laporan;
@@ -117,7 +118,6 @@ namespace SuroboyoMaju.Shared.Pages
                 txtJumlahKonfirmasiLaporan.Text = (Convert.ToInt32(txtJumlahKonfirmasiLaporan.Text) + 1).ToString();
             }
         }
-
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             if (mode == 1)
@@ -142,7 +142,6 @@ namespace SuroboyoMaju.Shared.Pages
                 NavigationMode = Xamarin.Essentials.NavigationMode.None
             });
         }
-
 
         public async void loadKomentarLaporan()
         {
