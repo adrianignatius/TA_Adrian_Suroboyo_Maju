@@ -76,7 +76,6 @@ namespace SuroboyoMaju.Shared.Class
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(API_URL);
-                //client.BaseAddress = new Uri(URL_DEBUG);
                 client.DefaultRequestHeaders.Add("Authorization", token);
                 HttpResponseMessage response = await client.PostAsync(url, form);
                 if (response.IsSuccessStatusCode)
@@ -96,7 +95,6 @@ namespace SuroboyoMaju.Shared.Class
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(API_URL);
-                //client.BaseAddress = new Uri(URL_DEBUG);
                 client.DefaultRequestHeaders.Add("Authorization", token);
                 client.DefaultRequestHeaders.Accept.Clear();
                 HttpResponseMessage response = await client.PostAsync(url, form);
@@ -117,7 +115,6 @@ namespace SuroboyoMaju.Shared.Class
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(API_URL);
-                //client.BaseAddress = new Uri(URL_DEBUG);
                 client.DefaultRequestHeaders.Accept.Clear();
                 HttpResponseMessage response = await client.PostAsync(url, form);
                 if (response.IsSuccessStatusCode)
@@ -137,7 +134,6 @@ namespace SuroboyoMaju.Shared.Class
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(API_URL);
-                //client.BaseAddress = new Uri(URL_DEBUG);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Add("Authorization", token);
                 HttpResponseMessage response = await client.PutAsync(url, form);
@@ -158,7 +154,6 @@ namespace SuroboyoMaju.Shared.Class
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(API_URL);
-                //client.BaseAddress = new Uri(URL_DEBUG);
                 client.DefaultRequestHeaders.Add("Authorization", token);
                 client.DefaultRequestHeaders.Accept.Clear();
                 HttpResponseMessage response = await client.DeleteAsync(url);

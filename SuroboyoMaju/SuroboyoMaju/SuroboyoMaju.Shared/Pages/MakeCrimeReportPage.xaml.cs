@@ -43,10 +43,10 @@ namespace SuroboyoMaju.Shared.Pages
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
             httpObject = new HttpObject();
-            dtTanggalLaporan.MaxYear = new DateTime(2020, 12, 31);
-            dtTanggalLaporan.MinYear = new DateTime(2020, 1, 31);
-            dtTanggalLaporan.Date = DateTime.Now;
-            tpWaktuLaporan.Time = DateTime.Now.TimeOfDay;
+            //dtTanggalLaporan.MaxYear = new DateTime(2020, 12, 31);
+            //dtTanggalLaporan.MinYear = new DateTime(2020, 1, 31);
+            //dtTanggalLaporan.Date = DateTime.Now;
+            //tpWaktuLaporan.Time = DateTime.Now.TimeOfDay;
         }
 
         private void DispatcherTimer_Tick(object sender, object e)
@@ -188,6 +188,8 @@ namespace SuroboyoMaju.Shared.Pages
                     int index = cbJenisKejadian.SelectedIndex;
                     SettingKategori kategoriSelected = listSetingKategoriKriminalitas[cbJenisKejadian.SelectedIndex];
                     int id_kecamatan = Convert.ToInt32(json["id_kecamatan"].ToString());
+                    //string tanggal_laporan = DateTime.Now.ToString("yyyy-MM-dd");
+                    //string waktu_laporan = DateTime.Now.ToString("HH:mm:ss");
                     string tanggal_laporan = dtTanggalLaporan.Date.ToString("yyyy-MM-dd");
                     string waktu_laporan = tpWaktuLaporan.Time.ToString();
                     ConfirmReportParams param = new ConfirmReportParams("kriminalitas", judulLaporan, null, descKejadian, lat, lng, alamatLaporan, id_kecamatan, kategoriSelected, index, imageLaporan,tanggal_laporan,waktu_laporan);
@@ -199,7 +201,6 @@ namespace SuroboyoMaju.Shared.Pages
                     var message = new MessageDialog(json["message"].ToString());
                     await message.ShowAsync();
                 }
-
             }
         }
 
@@ -233,7 +234,7 @@ namespace SuroboyoMaju.Shared.Pages
                     hasil = streamReader.ToArray();
                 }
                 string fileName = result.FileName;
-                imageLaporan = new UploadedImage(fileName, hasil, 0);
+                imageLaporan = new UploadedImage(fileName, hasil);
                 txtNamaFile.Text = fileName;
                 gridFile.Visibility = Visibility.Visible;
                 txtStatusFile.Visibility = Visibility.Collapsed;

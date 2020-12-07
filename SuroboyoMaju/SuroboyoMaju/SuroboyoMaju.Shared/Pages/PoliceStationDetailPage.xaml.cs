@@ -1,6 +1,5 @@
 ﻿using SuroboyoMaju.Shared.Class;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -8,7 +7,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Xamarin.Essentials;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SuroboyoMaju.Shared.Pages
 {
@@ -55,7 +53,6 @@ namespace SuroboyoMaju.Shared.Pages
             var location = new Location(double.Parse(selected.lat_kantor_polisi, CultureInfo.InvariantCulture), double.Parse(selected.lng_kantor_polisi, CultureInfo.InvariantCulture));
             var options = new MapLaunchOptions { NavigationMode = NavigationMode.Driving };
             await Map.OpenAsync(location, options);
-
         }
 
         private async void loadMap()
@@ -65,7 +62,7 @@ namespace SuroboyoMaju.Shared.Pages
             {
                 location = await Geolocation.GetLocationAsync(new GeolocationRequest
                 {
-                    DesiredAccuracy = GeolocationAccuracy.Medium,
+                    DesiredAccuracy = GeolocationAccuracy.Best,
                     Timeout = TimeSpan.FromSeconds(30)
                 });
             }

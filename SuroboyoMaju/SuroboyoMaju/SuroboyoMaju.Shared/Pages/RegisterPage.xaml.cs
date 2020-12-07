@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -121,62 +122,121 @@ namespace SuroboyoMaju.Shared.Pages
             args.Cancel = args.NewText.Any(c => char.IsDigit(c));
         }
 
-        private async void register(object sender, RoutedEventArgs e)
+        private async Task<bool> validasiInput()
         {
             if (txtFullName.Text.Length != 0 && txtPassword.Password.Length != 0 && txtConfirmPassword.Password.Length != 0 && txtPhone.Text.Length != 0)
             {
-                if (txtPassword.Password == txtConfirmPassword.Password)
+                if (txtPassword.Password != txtConfirmPassword.Password)
                 {
-                    string responseData = await httpObject.GetRequest("settings/checkKecamatanAvailable?lat=" + lat + "&lng=" + lng);
-                    JObject json = JObject.Parse(responseData);
-                    if (json["status"].ToString() == "1")
-                    {
-                        var formContent = new Dictionary<string, string>();
-                        formContent.Add("nama_user", txtFullName.Text);
-                        formContent.Add("telpon_user", txtPhone.Text);
-                        formContent.Add("password_user", txtPassword.Password);
-                        if (txtAutocompleteAddress.Text.Length != 0)
-                        {
-                            formContent.Add("alamat_available", "1");
-                            formContent.Add("lokasi_aktif_user", txtAutocompleteAddress.Text);
-                            formContent.Add("lat_user", lat);
-                            formContent.Add("lng_user", lng);
-                        }
-                        else
-                        {
-                            formContent.Add("alamat_available", "0");
-                        }
-                        responseData = await httpObject.PostRequestWithUrlEncoded("registerUser", new FormUrlEncodedContent(formContent));
-                        json = JObject.Parse(responseData);
-                        await new MessageDialog(json["message"].ToString()).ShowAsync();
-                        if (json["status"].ToString() == "1")
-                        {
-                            string data = json["data"].ToString();
-                            User userRegister = JsonConvert.DeserializeObject<User>(data);
-                            session.setUserLogin(userRegister);
-                            session.setTokenAuthorization(json["token"].ToString());
-                            this.Frame.Navigate(typeof(VerifyOtpPage));
-                        }
-                    }
-                    else
-                    {
-                        var message = new MessageDialog(json["message"].ToString());
-                        await message.ShowAsync();
-                    }
-
+                    await new MessageDialog("Password dan konfirmasi password tidak sesuai").ShowAsync();
+                    return false;
                 }
                 else
                 {
-                    var message = new MessageDialog("Confirm password tidak sesuai dengan password yang dimasukkan");
-                    await message.ShowAsync();
+                    return true;
                 }
             }
-            else
-            {
-                var message = new MessageDialog("Ada field yang masih kosong, harap lengkapi data terlebih dahulu");
-                await message.ShowAsync();
+            else{
+                await new MessageDialog("Lengkapi semua data terlebih dahulu").ShowAsync();
+                return false;
             }
         }
 
+        private async void register(object sender, RoutedEventArgs e)
+        {
+
+            if (Convert.ToBoolean(await validasiInput()))
+            {
+                string responseData = await httpObject.GetRequest("settings/checkKecamatanAvailable?lat=" + lat + "&lng=" + lng);
+                JObject json = JObject.Parse(responseData);
+                if (json["status"].ToString() == "1")
+                {
+                    var formContent = new Dictionary<string, string>();
+                    formContent.Add("nama_user", txtFullName.Text);
+                    formContent.Add("telpon_user", txtPhone.Text);
+                    formContent.Add("password_user", txtPassword.Password);
+                    if (txtAutocompleteAddress.Text.Length != 0)
+                    {
+                        formContent.Add("alamat_available", "1");
+                        formContent.Add("lokasi_aktif_user", txtAutocompleteAddress.Text);
+                        formContent.Add("lat_user", lat);
+                        formContent.Add("lng_user", lng);
+                    }
+                    else
+                    {
+                        formContent.Add("alamat_available", "0");
+                    }
+                    responseData = await httpObject.PostRequestWithUrlEncoded("registerUser", new FormUrlEncodedContent(formContent));
+                    json = JObject.Parse(responseData);
+                    await new MessageDialog(json["message"].ToString()).ShowAsync();
+                    if (json["status"].ToString() == "1")
+                    {
+                        string data = json["data"].ToString();
+                        User userRegister = JsonConvert.DeserializeObject<User>(data);
+                        session.setUserLogin(userRegister);
+                        session.setTokenAuthorization(json["token"].ToString());
+                        this.Frame.Navigate(typeof(VerifyOtpPage));
+                    }
+                }
+                else
+                {
+                    var message = new MessageDialog(json["message"].ToString());
+                    await message.ShowAsync();
+                }
+            }
+            //if (txtFullName.Text.Length != 0 && txtPassword.Password.Length != 0 && txtConfirmPassword.Password.Length != 0 && txtPhone.Text.Length != 0)
+            //{
+            //    if (txtPassword.Password == txtConfirmPassword.Password)
+            //    {
+            //        string responseData = await httpObject.GetRequest("settings/checkKecamatanAvailable?lat=" + lat + "&lng=" + lng);
+            //        JObject json = JObject.Parse(responseData);
+            //        if (json["status"].ToString() == "1")
+            //        {
+            //            var formContent = new Dictionary<string, string>();
+            //            formContent.Add("nama_user", txtFullName.Text);
+            //            formContent.Add("telpon_user", txtPhone.Text);
+            //            formContent.Add("password_user", txtPassword.Password);
+            //            if (txtAutocompleteAddress.Text.Length != 0)
+            //            {
+            //                formContent.Add("alamat_available", "1");
+            //                formContent.Add("lokasi_aktif_user", txtAutocompleteAddress.Text);
+            //                formContent.Add("lat_user", lat);
+            //                formContent.Add("lng_user", lng);
+            //            }
+            //            else
+            //            {
+            //                formContent.Add("alamat_available", "0");
+            //            }
+            //            responseData = await httpObject.PostRequestWithUrlEncoded("registerUser", new FormUrlEncodedContent(formContent));
+            //            json = JObject.Parse(responseData);
+            //            await new MessageDialog(json["message"].ToString()).ShowAsync();
+            //            if (json["status"].ToString() == "1")
+            //            {
+            //                string data = json["data"].ToString();
+            //                User userRegister = JsonConvert.DeserializeObject<User>(data);
+            //                session.setUserLogin(userRegister);
+            //                session.setTokenAuthorization(json["token"].ToString());
+            //                this.Frame.Navigate(typeof(VerifyOtpPage));
+            //            }
+            //        }
+            //        else
+            //        {
+            //            var message = new MessageDialog(json["message"].ToString());
+            //            await message.ShowAsync();
+            //        }
+
+            //    }
+            //    else
+            //    {
+            //        var message = new MessageDialog("Confirm password tidak sesuai dengan password yang dimasukkan");
+            //        await message.ShowAsync();
+            //    }
+            //}
+            //else
+            //{
+            //    var message = new MessageDialog("Ada field yang masih kosong, harap lengkapi data terlebih dahulu");
+            //    await message.ShowAsync();
+            //}
+        }
     }
 }

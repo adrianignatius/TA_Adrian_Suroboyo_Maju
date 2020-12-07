@@ -78,10 +78,8 @@ namespace SuroboyoMaju.Shared.Pages
             string responseData=await httpObject.GetRequestWithAuthorization("user/getEmergencyContact/"+userLogin.id_user,session.getTokenAuthorization());
             listEmergencyContact = JsonConvert.DeserializeObject<ObservableCollection<User>>(responseData);
             if(listEmergencyContact.Count<1){
-                var message = new MessageDialog("Tidak ada kontak darurat yang terdaftar");
-                await message.ShowAsync();
-            }
-                
+                await new MessageDialog("Tidak ada kontak darurat yang terdaftar").ShowAsync();
+            }  
             else
             {
                 string address = await getUserAddress();

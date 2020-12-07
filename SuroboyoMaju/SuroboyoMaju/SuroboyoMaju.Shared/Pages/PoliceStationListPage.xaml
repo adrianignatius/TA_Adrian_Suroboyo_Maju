@@ -88,6 +88,11 @@
                 <ProgressRing Width="150" Height="150" IsActive="True"></ProgressRing>
                 <TextBlock Foreground="Black" FontWeight="Bold" TextAlignment="Center" TextWrapping="WrapWholeWords" FontSize="20" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Text="Sedang memuat data"></TextBlock>
             </StackPanel>
+            <StackPanel Visibility="Collapsed" Name="stackEmpty" Margin="0,80,0,0" Grid.Row="1">
+                <Image MaxWidth="400" Height="420" MaxHeight="420" Stretch="UniformToFill" VerticalAlignment="Center" Source="/Assets/location-illustration.png"></Image>
+                <TextBlock Margin="8,0,8,0" Foreground="Gray" Name="txtEmptyState" FontWeight="Bold" TextAlignment="Center" TextWrapping="WrapWholeWords" FontSize="20" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Text="Halaman ini membutuhkan akses lokasi dari device anda"></TextBlock>
+                <Button Click="requestLocation" Margin="0,16,0,0" CornerRadius="10" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" HorizontalAlignment="Center" Foreground="white" Background="green">Beri Akses Lokasi</Button>
+            </StackPanel>
             <android:ListView Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="goToDetail" Margin="0,10,0,0" Name="gvListKantorPolisi">
                 <ListView.ItemTemplate>
                     <DataTemplate x:Name="ImageOverlayDataTemplate">

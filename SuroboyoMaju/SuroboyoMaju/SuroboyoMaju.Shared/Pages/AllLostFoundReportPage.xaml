@@ -82,7 +82,6 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="lvLaporanLostFound.ItemTemplate" Value="{StaticResource uwpTemplate}"></Setter>
-                        
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

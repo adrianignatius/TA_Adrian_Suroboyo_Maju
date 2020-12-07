@@ -274,6 +274,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\icon\violence-icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\icon\wallet-icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\icon\watch-icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\location-illustration.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\logo-bg.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\no-image.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\payment-illustration.jpg" />

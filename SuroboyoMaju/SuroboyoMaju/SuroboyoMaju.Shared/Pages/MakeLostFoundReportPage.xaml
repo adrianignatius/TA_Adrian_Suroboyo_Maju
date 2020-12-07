@@ -37,10 +37,10 @@
 
                 </ComboBox>
                 <TextBlock Margin="0,30,0,0" Text="Deskripsi Barang" FontSize="20"></TextBlock>
-                <TextBox FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="txtDescBarang" Margin="0,10,0,0" HorizontalAlignment="Stretch" FontSize="20"  Height="150" TextWrapping="Wrap"></TextBox>
+                <TextBox AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Name="txtDescBarang" Margin="0,10,0,0" HorizontalAlignment="Stretch" FontSize="20"  Height="150" TextWrapping="Wrap"></TextBox>
                 <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                    <TextBlock Text="Lokasi Kejadian" FontSize="20"></TextBlock>
-                    <Button Click="useLocation" Margin="10,0,0,0" Foreground="White" Background="Green" CornerRadius="10" Content="Lokasi anda"></Button>
+                    <TextBlock Text="Lokasi" FontSize="20"></TextBlock>
+                    <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Click="useLocation" Margin="10,0,0,0" Foreground="White" Background="Green" CornerRadius="10" Content="Lokasi anda"></Button>
                 </StackPanel>
                 <TextBox FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" TextChanged="txtAutocompleteAddressTextChanged" Name="txtAutocompleteAddress" FontSize="16" Margin="0,10,0,0"  HorizontalAlignment="Stretch"></TextBox>
                 <ListView IsItemClickEnabled="True" ItemClick="suggestionChosen" Name="lvSuggestion">
@@ -61,10 +61,10 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock TextWrapping="Wrap" Grid.Column="0" Name="txtNamaFile" FontSize="14"></TextBlock>
-                    <Button Grid.Column="1" CornerRadius="10" Click="deleteFile" Margin="4,0,0,0" Content="X" Foreground="White" Background="Green"></Button>
+                    <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Grid.Column="1" CornerRadius="10" Click="deleteFile" Margin="4,0,0,0" Content="X" Foreground="White" Background="Green"></Button>
                 </Grid>
                 <TextBlock Name="txtStatusFile" FontSize="14" Foreground="Gray" Text="Tidak ada gambar terpilih"></TextBlock>
-                <Button Click="goToDetail" CornerRadius="5" Foreground="AntiqueWhite" Background="Green" FontSize="20" Width="150" Margin="0,20,0,0" Content="Selanjutnya" HorizontalAlignment="Center"></Button>
+                <Button FontFamily="ms-appx:///Assets/Fonts/Alata-Regular.ttf#Alata" Click="goToDetail" CornerRadius="5" Foreground="AntiqueWhite" Background="Green" FontSize="20" Width="200" Margin="0,20,0,20" Content="Selanjutnya" HorizontalAlignment="Center"></Button>
             </StackPanel>
         </ScrollViewer>
     </Grid>

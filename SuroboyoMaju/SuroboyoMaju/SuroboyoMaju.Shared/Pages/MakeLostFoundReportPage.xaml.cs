@@ -43,10 +43,10 @@ namespace SuroboyoMaju.Shared.Pages
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
-            dtTanggalLaporan.MaxYear = new DateTime(2020, 12, 31);
-            dtTanggalLaporan.MinYear = new DateTime(2020, 1, 31);
-            dtTanggalLaporan.Date = DateTime.Now;
-            tpWaktuLaporan.Time = DateTime.Now.TimeOfDay;
+            //dtTanggalLaporan.MaxYear = new DateTime(2020, 12, 31);
+            //dtTanggalLaporan.MinYear = new DateTime(2020, 1, 31);
+            //dtTanggalLaporan.Date = DateTime.Now;
+            //tpWaktuLaporan.Time = DateTime.Now.TimeOfDay;
         }
 
         private void DispatcherTimer_Tick(object sender, object e)
@@ -185,6 +185,8 @@ namespace SuroboyoMaju.Shared.Pages
                             string namaFileGambar = listSettingKategoriLostFound[cbJenisBarang.SelectedIndex].file_gambar_kategori;
                             string tanggal_laporan = dtTanggalLaporan.Date.ToString("yyyy-MM-dd");
                             string waktu_laporan = tpWaktuLaporan.Time.ToString();
+                            //string tanggal_laporan = DateTime.Now.ToString("yyyy-MM-dd");
+                            //string waktu_laporan = DateTime.Now.ToString("HH:mm:ss");
                             ConfirmReportParams param = new ConfirmReportParams("lostfound", judulLaporan, jenisLaporan.ToString(), descLaporan, lat, lng, alamatLaporan, id_kecamatan, kategoriSelected, index, imageLaporan, tanggal_laporan, waktu_laporan);
                             session.setConfirmreportParam(param);
                             this.Frame.Navigate(typeof(ConfirmReportPage));
@@ -273,7 +275,7 @@ namespace SuroboyoMaju.Shared.Pages
                     hasil = streamReader.ToArray();
                 }
                 string fileName = result.FileName;
-                imageLaporan = new UploadedImage(fileName, hasil, 0);
+                imageLaporan = new UploadedImage(fileName, hasil);
                 txtNamaFile.Text = fileName;
                 gridFile.Visibility = Visibility.Visible;
                 txtStatusFile.Visibility = Visibility.Collapsed;

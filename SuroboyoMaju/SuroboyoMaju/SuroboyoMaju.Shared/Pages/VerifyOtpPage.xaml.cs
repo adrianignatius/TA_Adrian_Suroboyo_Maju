@@ -22,7 +22,7 @@ namespace SuroboyoMaju.Shared.Pages
         User userRegister;
         DispatcherTimer timer;
         HttpObject httpObject;
-        int countdown = 30;
+        int countdown = 120;
         public VerifyOtpPage()
         {
             this.InitializeComponent();
@@ -44,14 +44,7 @@ namespace SuroboyoMaju.Shared.Pages
 
         private void updateTxtTimer()
         {
-            if (countdown < 10)
-            {
-                txtTimer.Text = "00:0" + countdown;
-            }
-            else
-            {
-                txtTimer.Text = "00:" + countdown;
-            }
+            txtTimer.Text = "0" + countdown/60 + ":" + countdown % 60;
         }
 
         private void Timer_Tick(object sender, object e)
@@ -70,7 +63,6 @@ namespace SuroboyoMaju.Shared.Pages
 
         private void pageLoaded(object sender, RoutedEventArgs e)
         {
-            
             sendOTP();
         }
 
@@ -91,7 +83,7 @@ namespace SuroboyoMaju.Shared.Pages
             }
             else
             {
-                countdown = 30;
+                countdown = 120;
                 timer.Start();
                 txtTimer.Visibility = Visibility.Visible;
                 sendOTP();

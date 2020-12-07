@@ -17,6 +17,7 @@ using Xamarin.Essentials;
 using Windows.UI.Popups;
 using System.Threading;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
 
 #if __ANDROID__
 using Com.OneSignal;
@@ -61,19 +62,33 @@ namespace SuroboyoMaju.Shared.Pages
             }
         }
 
+        public async Task<PermissionStatus> CheckAndRequestLocationPermission()
+        {
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+            if (status == PermissionStatus.Granted)
+                return status;
+
+            status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+
+            return status;
+        }
+
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
 #if __ANDROID__
-            var status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
-            OneSignal.Current.AddTrigger("firstLogin", "true");
-            var request = new GeolocationRequest(GeolocationAccuracy.Best,TimeSpan.FromSeconds(30));
-            System.Threading.CancellationTokenSource cts = new System.Threading.CancellationTokenSource();
-            var location = await Geolocation.GetLocationAsync(request,cts.Token);
-            string queryParams = "?lat=" + location.Latitude + "&lng=" + location.Longitude;
-            if (location != null)
+            var status=await CheckAndRequestLocationPermission();
+            if (status == PermissionStatus.Granted)
             {
-                string responseData = await new HttpObject().PutRequest("user/updateLocation/" + session.getUserLogin().id_user+queryParams,null,session.getTokenAuthorization());
-                JObject json = JObject.Parse(responseData);
+                var request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(30));
+                System.Threading.CancellationTokenSource cts = new System.Threading.CancellationTokenSource();
+                var location = await Geolocation.GetLocationAsync(request, cts.Token);
+                string queryParams = "?lat=" + location.Latitude + "&lng=" + location.Longitude;
+                if (location != null)
+                {
+                    string responseData = await new HttpObject().PutRequest("user/updateLocation/" + session.getUserLogin().id_user + queryParams, null, session.getTokenAuthorization());
+                    JObject json = JObject.Parse(responseData);
+                }
             }
 #endif
             session.setHomeNavigationPageInstance(this);

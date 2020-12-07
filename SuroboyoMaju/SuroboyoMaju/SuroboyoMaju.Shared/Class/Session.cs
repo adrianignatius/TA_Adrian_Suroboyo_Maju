@@ -8,28 +8,17 @@ namespace SuroboyoMaju.Shared.Class
     class Session
     {
         private static string tokenAuthorization { get; set; }
-
         private static int pageState = 0;
-
         private static int filterState = 0;
-
         private static int jumlahLaporanState = 0;
         private static User userLogin { get; set; }
-
         private static HomeNavigationPage pageInstance { get; set; }
-
         private static HomeNavigationPageKepalaKeamanan homePageKepalaKeamananInstance { get; set; }
-
         private static FilterParams filterParams { get; set; }
-
         private static ReportDetailPageParams reportDetailPageParam { get; set; }
-
         public static ChatPageParams chatPageParam { get; set; }
-
         private static ConfirmReportParams confirmReportParam { get; set; }
-
         private static KantorPolisi kantorPolisiSelected { get; set; }
-
         private readonly static string URL_WEBVIEW = "http://adrian-webview.ta-istts.com/";
         private readonly static string URL_ASSETS = "http://adrian-assets.ta-istts.com/";
         private readonly static string URL_GAMBAR_LAPORAN = "http://adrian-webservice.ta-istts.com/public/uploads/";

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -36,44 +37,59 @@ namespace SuroboyoMaju.Shared.Pages
             gvListKantorPolisi.Visibility = Visibility.Visible;
         }
 
+        private async void requestLocation(object sender, RoutedEventArgs e)
+        {
+            var status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+        }
+
         public async void pageLoaded(object sender, RoutedEventArgs e)
         {
-            showLoading();
-            session = new Session();
-            var location = await Geolocation.GetLastKnownLocationAsync();
-            if (location == null)
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            if (status == PermissionStatus.Granted)
             {
-                location = await Geolocation.GetLocationAsync(new GeolocationRequest
+                showLoading();
+                session = new Session();
+                var location = await Geolocation.GetLastKnownLocationAsync();
+                if (location == null)
                 {
-                    DesiredAccuracy = GeolocationAccuracy.Best,
-                    Timeout = TimeSpan.FromSeconds(30)
-                });
-            }
-            string origins = location.Latitude.ToString().Replace(",", ".") + "," + location.Longitude.ToString().Replace(",", ".");
-            string responseData = await httpObject.GetRequestWithAuthorization("settings/getAllKantorPolisi", session.getTokenAuthorization());
-            string destinations = "";
-            listKantorPolisi = JsonConvert.DeserializeObject<ObservableCollection<KantorPolisi>>(responseData);
-            for (int i = 0; i < listKantorPolisi.Count; i++)
-            {
-                destinations += listKantorPolisi[i].lat_kantor_polisi.Replace(",", ".") + "," + listKantorPolisi[i].lng_kantor_polisi.Replace(",", ".") + "|";
-            }
-            destinations.Remove(destinations.Length - 1, 1);
-            string reqUri = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metrics&origins=" + origins + "&destinations=" + destinations + "&key=AIzaSyA9rHJZEGWe6rX4nAHTGXFxCubmw-F0BBw";
-            responseData = await httpObject.GetRequest(reqUri);
-            JObject json = JObject.Parse(responseData);
-            var token = JToken.Parse(responseData)["rows"][0]["elements"].ToList().Count;
-            for (int i = 0; i < token; i++)
-            {
+                    location = await Geolocation.GetLocationAsync(new GeolocationRequest
+                    {
+                        DesiredAccuracy = GeolocationAccuracy.Best,
+                        Timeout = TimeSpan.FromSeconds(30)
+                    });
+                }
+                string origins = location.Latitude.ToString().Replace(",", ".") + "," + location.Longitude.ToString().Replace(",", ".");
+                string responseData = await httpObject.GetRequestWithAuthorization("settings/getAllKantorPolisi", session.getTokenAuthorization());
+                string destinations = "";
+                listKantorPolisi = JsonConvert.DeserializeObject<ObservableCollection<KantorPolisi>>(responseData);
+                for (int i = 0; i < listKantorPolisi.Count; i++)
+                {
+                    destinations += listKantorPolisi[i].lat_kantor_polisi.Replace(",", ".") + "," + listKantorPolisi[i].lng_kantor_polisi.Replace(",", ".") + "|";
+                }
+                destinations.Remove(destinations.Length - 1, 1);
+                string reqUri = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metrics&origins=" + origins + "&destinations=" + destinations + "&key=AIzaSyA9rHJZEGWe6rX4nAHTGXFxCubmw-F0BBw";
+                responseData = await httpObject.GetRequest(reqUri);
+                JObject json = JObject.Parse(responseData);
+                var token = JToken.Parse(responseData)["rows"][0]["elements"].ToList().Count;
+                for (int i = 0; i < token; i++)
+                {
 #if NETFX_CORE
-                string distance = json["rows"][0]["elements"][i]["distance"]["text"].ToString().Split(" ")[0].Replace(".", ",");
+                    string distance = json["rows"][0]["elements"][i]["distance"]["text"].ToString().Split(" ")[0].Replace(".", ",");
 #elif __ANDROID__
                                 string distance = json["rows"][0]["elements"][i]["distance"]["text"].ToString().Split(" ")[0];
 #endif
-                listKantorPolisi[i].distance = Convert.ToDouble(distance);
+                    listKantorPolisi[i].distance = Convert.ToDouble(distance);
+                }
+                listKantorPolisi = new ObservableCollection<KantorPolisi>(listKantorPolisi.OrderBy(k => k.distance));
+                gvListKantorPolisi.ItemsSource = listKantorPolisi;
+                hideLoading();
             }
-            listKantorPolisi = new ObservableCollection<KantorPolisi>(listKantorPolisi.OrderBy(k => k.distance));
-            gvListKantorPolisi.ItemsSource = listKantorPolisi;
-            hideLoading();
+            else
+            {
+                gvListKantorPolisi.Visibility = Visibility.Collapsed;
+                stackEmpty.Visibility = Visibility.Visible;
+            }
+            
         }
 
         public void goToDetail(object sender, ItemClickEventArgs e)

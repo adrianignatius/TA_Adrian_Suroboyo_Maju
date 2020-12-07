@@ -56,7 +56,6 @@ namespace SuroboyoMaju.Shared.Pages
         {
             var formContent = new Dictionary<string, string>();
             formContent.Add("nama_user", param.nama_user);
-            formContent.Add("id_user", param.id_user.ToString());
             formContent.Add("password_user", txtPassword.Password);
             if (param.lokasi_aktif_user == null)
             {
@@ -69,7 +68,7 @@ namespace SuroboyoMaju.Shared.Pages
                 formContent.Add("lng_user", param.lng_user);
                 formContent.Add("lokasi_aktif_user", param.lokasi_aktif_user);
             }
-            string responseData = await httpObject.PutRequest("user/updateProfile", new FormUrlEncodedContent(formContent), session.getTokenAuthorization());
+            string responseData = await httpObject.PutRequest("user/updateProfile/"+param.id_user, new FormUrlEncodedContent(formContent), session.getTokenAuthorization());
             JObject json = JObject.Parse(responseData);
             var message = new MessageDialog(json["message"].ToString());
             await message.ShowAsync();

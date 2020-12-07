@@ -75,12 +75,10 @@ namespace SuroboyoMaju
                     string thumbnail_gambar = additionalData["thumbnail_gambar"].ToString();
                     int status_laporan = Convert.ToInt32(additionalData["status_laporan"].ToString());
                     int? jumlah_konfirmasi = 0;
-                    if (tag == "kriminalitas")
-                    {
+                    if (tag == "kriminalitas"){
                         jumlah_konfirmasi = Convert.ToInt32(additionalData["jumlah_konfirmasi"].ToString());
                     }
-                    else
-                    {
+                    else{
                         jumlah_konfirmasi = null;
                     }
                     ReportDetailPageParams param = new ReportDetailPageParams(id_user_pelapor, nama_user_pelapor, id_laporan, alamat_laporan, tanggal_laporan, waktu_laporan, judul_laporan, jenis_laporan, deskripsi_laporan, lat_laporan, lng_laporan, tag, thumbnail_gambar, status_laporan, jumlah_konfirmasi);
