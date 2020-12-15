@@ -19,8 +19,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Xamarin.Essentials;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace SuroboyoMaju.Shared.Pages
 {
     public sealed partial class MakeLostFoundReportPage : Page
@@ -183,10 +181,10 @@ namespace SuroboyoMaju.Shared.Pages
                             int index = cbJenisBarang.SelectedIndex;
                             int id_kecamatan = Convert.ToInt32(json["id_kecamatan"].ToString());
                             string namaFileGambar = listSettingKategoriLostFound[cbJenisBarang.SelectedIndex].file_gambar_kategori;
-                            string tanggal_laporan = dtTanggalLaporan.Date.ToString("yyyy-MM-dd");
-                            string waktu_laporan = tpWaktuLaporan.Time.ToString();
-                            //string tanggal_laporan = DateTime.Now.ToString("yyyy-MM-dd");
-                            //string waktu_laporan = DateTime.Now.ToString("HH:mm:ss");
+                            //string tanggal_laporan = dtTanggalLaporan.Date.ToString("yyyy-MM-dd");
+                            //string waktu_laporan = tpWaktuLaporan.Time.ToString();
+                            string tanggal_laporan = DateTime.Now.ToString("yyyy-MM-dd");
+                            string waktu_laporan = DateTime.Now.ToString("HH:mm:ss");
                             ConfirmReportParams param = new ConfirmReportParams("lostfound", judulLaporan, jenisLaporan.ToString(), descLaporan, lat, lng, alamatLaporan, id_kecamatan, kategoriSelected, index, imageLaporan, tanggal_laporan, waktu_laporan);
                             session.setConfirmreportParam(param);
                             this.Frame.Navigate(typeof(ConfirmReportPage));

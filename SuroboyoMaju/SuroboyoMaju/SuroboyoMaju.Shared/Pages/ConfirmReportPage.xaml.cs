@@ -32,8 +32,6 @@ namespace SuroboyoMaju.Shared.Pages
             param = session.getConfirmReportParams();
             imageIcon.Source = new BitmapImage(new Uri(url + param.kategori_selected.file_gambar_kategori));
             txtJenisLaporan.Text = param.kategori_selected.nama_kategori;
-            //tanggal = DateTime.Now.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("id-ID"));
-            //waktu = DateTime.Now.ToString("HH:mm:ss");
             txtTanggalLaporan.Text = DateTime.Parse(param.tanggal_laporan).ToString("dd MMMM yyyy",new System.Globalization.CultureInfo("id-ID"))+" Pukul "+param.waktu_laporan;
             txtJudulLaporan.Text = param.judul_laporan;
             txtDeskripsiLaporan.Text = param.deskripsi_laporan;
@@ -88,8 +86,6 @@ namespace SuroboyoMaju.Shared.Pages
             form.Add(new StringContent(param.judul_laporan), "judul_laporan");
             form.Add(new StringContent(param.tanggal_laporan), "tanggal_laporan");
             form.Add(new StringContent(param.waktu_laporan), "waktu_laporan");
-            //form.Add(new StringContent(DateTime.Now.ToString("yyyy-MM-dd")), "tanggal_laporan");
-            //form.Add(new StringContent(DateTime.Now.ToString("HH:mm:ss")), "waktu_laporan");
             form.Add(new StringContent(param.alamat_laporan), "alamat_laporan");
             form.Add(new StringContent(param.lat_laporan), "lat_laporan");
             form.Add(new StringContent(param.lng_laporan), "lng_laporan");
@@ -104,10 +100,6 @@ namespace SuroboyoMaju.Shared.Pages
             {
                 form.Add(new StringContent(param.kategori_selected.id_kategori.ToString()), "id_kategori_kejadian");
                 form.Add(new StringContent(param.deskripsi_laporan), "deskripsi_kejadian");
-                //if (param.image_laporan != null)
-                //{
-                //    form.Add(new StreamContent(new MemoryStream(param.image_laporan.image)), "image", "image.jpg");
-                //}
                 responseData = await httpObject.PostRequestWithMultipartFormData("laporan/insertLaporanKriminalitas", form, session.getTokenAuthorization());
             }
             else
@@ -115,7 +107,6 @@ namespace SuroboyoMaju.Shared.Pages
                 form.Add(new StringContent(param.kategori_selected.id_kategori.ToString()), "id_kategori_barang");
                 form.Add(new StringContent(param.jenis_laporan.ToString()), "jenis_laporan");
                 form.Add(new StringContent(param.deskripsi_laporan), "deskripsi_barang");
-                //form.Add(new StreamContent(new MemoryStream(param.image_laporan.image)), "image", "image.jpg");
                 responseData = await httpObject.PostRequestWithMultipartFormData("laporan/insertLaporanLostFound", form, session.getTokenAuthorization());
             }
             JObject json = JObject.Parse(responseData);

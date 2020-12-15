@@ -19,8 +19,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Xamarin.Essentials;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace SuroboyoMaju.Shared.Pages
 {
     public sealed partial class MakeCrimeReportPage : Page
@@ -188,10 +186,10 @@ namespace SuroboyoMaju.Shared.Pages
                     int index = cbJenisKejadian.SelectedIndex;
                     SettingKategori kategoriSelected = listSetingKategoriKriminalitas[cbJenisKejadian.SelectedIndex];
                     int id_kecamatan = Convert.ToInt32(json["id_kecamatan"].ToString());
-                    //string tanggal_laporan = DateTime.Now.ToString("yyyy-MM-dd");
-                    //string waktu_laporan = DateTime.Now.ToString("HH:mm:ss");
-                    string tanggal_laporan = dtTanggalLaporan.Date.ToString("yyyy-MM-dd");
-                    string waktu_laporan = tpWaktuLaporan.Time.ToString();
+                    string tanggal_laporan = DateTime.Now.ToString("yyyy-MM-dd");
+                    string waktu_laporan = DateTime.Now.ToString("HH:mm:ss");
+                    //string tanggal_laporan = dtTanggalLaporan.Date.ToString("yyyy-MM-dd");
+                    //string waktu_laporan = tpWaktuLaporan.Time.ToString();
                     ConfirmReportParams param = new ConfirmReportParams("kriminalitas", judulLaporan, null, descKejadian, lat, lng, alamatLaporan, id_kecamatan, kategoriSelected, index, imageLaporan,tanggal_laporan,waktu_laporan);
                     session.setConfirmreportParam(param);
                     this.Frame.Navigate(typeof(ConfirmReportPage));

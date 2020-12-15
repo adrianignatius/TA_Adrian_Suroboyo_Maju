@@ -38,7 +38,7 @@ namespace SuroboyoMaju
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 #if __ANDROID__
-            OneSignal.Current.StartInit("bba49751-5018-421d-82f5-fe83cc866ce6").HandleNotificationOpened(HandleNotificationOpened)
+            OneSignal.Current.StartInit("75fbcc20-c638-4b38-b9ae-f70623a688dd").HandleNotificationOpened(HandleNotificationOpened)
               .Settings(new Dictionary<string, bool>() {
                 { IOSSettings.kOSSettingsKeyAutoPrompt, false },
                 { IOSSettings.kOSSettingsKeyInAppLaunchURL, false } })
